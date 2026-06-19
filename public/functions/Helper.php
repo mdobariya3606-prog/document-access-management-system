@@ -64,7 +64,8 @@ class Helper
         $stmt->execute();
     }
 
-    function getAllUsers() {
+    function getAllUsers()
+    {
         return mysqli_query($this->conn, 'select * from user_info');
     }
 
@@ -101,7 +102,8 @@ class Helper
         $stmt->execute();
     }
 
-    function existsByOtp($otp) {
+    function existsByOtp($otp)
+    {
         $sql = 'select id from password_reset where otp = ?';
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('s', $otp);
@@ -109,5 +111,16 @@ class Helper
         $result = $stmt->get_result();
 
         return ($result->num_rows != 0) ? true : false;
+    }
+
+    function changePassword($id, $password)
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $sql = 'update user_info set password = ? where id = ?';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('si', $hash, $id);
+        $stmt->execute();
+
+        $this->logAction($id, 'PASSWORD_RESET');
     }
 }

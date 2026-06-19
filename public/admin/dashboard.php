@@ -43,7 +43,7 @@ $users = $helper->getAllUsers();
                                 <td><?php echo $user['status']; ?></td>
                                 <td>
                                     <a href="../admin/change-status.php?id=<?php echo $user['id']; ?>">Change status</a>
-                                    <a href="">Reset password</a>
+                                    <a href="../admin/change-user-password.php?id=<?php echo $user['id']; ?>">Reset password</a>
                                 </td>
                 </tr>
     <?php }
