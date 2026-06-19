@@ -16,9 +16,9 @@ Create a Private Cloud-Based Document Sharing Platform
   → Any other user must be completely denied access.
 
 • Simple authentication system
-  → Only email + password login (no social login, no OAuth).
-  → Users can register.
-  → Password reset and change password features are required.
+  ✓ Only email + password login (no social login, no OAuth).
+  ✓ Users can register.
+  ✓ Password reset and change password features are required.
   → Basic profile management.
 
 • Admin panel
@@ -37,11 +37,11 @@ Create a Private Cloud-Based Document Sharing Platform
 This is someone who has not logged in yet.
 
 Modules:
-→ Registration (Email + Password)
-→ Login
-→ Forgot Password
-→ Reset Password
-→ Email verification (recommended for security)
+✓ Registration (Email + Password)
+✓ Login
+✓ Forgot Password
+✓ Reset Password
+✓ Email verification (recommended for security)
 
 Access Restrictions:
 → Cannot view any documents
@@ -55,7 +55,7 @@ This is the main system user.
 
 A) Account Management
 → Update profile (name, email)
-→ Change password
+✓ Change password
 → View storage usage (optional but recommended)
 
 B) Document Management (Owner Side)
@@ -90,9 +90,9 @@ D) Shared With Me Section
 This is system-level management.
 
 A) User Management
-→ View all registered users
-→ Activate / deactivate users
-→ Delete users
+✓ View all registered users
+✓ Activate / deactivate users
+✓ Delete users
 → Reset user passwords (optional)
 
 B) Storage Monitoring
@@ -124,19 +124,19 @@ Basic dashboard:
 → Role & permission system
 → File upload service
 → Object storage integration
-→ Access validation middleware
+✓ Access validation middleware
 → Email service (for invite notification + reset password)
 → API layer (if frontend is separated)
 → Docker configuration
-→ Environment config (.env management)
+✓ Environment config (.env management)
 
 
 5. DATABASE CORE TABLES (High-Level)
 
-→ users
-→ documents
+✓ users
+✓ documents
 → folders (optional)
-→ document_user_permissions (pivot table)
+✓ document_user_permissions (pivot table)
 → storage_logs
-→ password_resets
-→ audit_logs
+✓ password_resets
+✓ audit_logs

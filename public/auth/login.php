@@ -35,11 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
+
+                require '../middleware/status.php';
+
                 $email = $row['email'];
                 setcookie('remember_me', $email, time() + 86400, '/');
 
                 $_SESSION['user'] = $row;
-                $_SESSION['admin'] = ($_SESSION['user']['role'] == 'admin') ? true : false;
+                $_SESSION['admin'] = ($_SESSION['user']['role'] == 'ADMIN') ? true : false;
 
                 $helper->logAction($_SESSION['user']['id'], 'LOGIN');
 

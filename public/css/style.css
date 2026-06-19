@@ -1,113 +1,173 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: poppins;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: poppins;
+  box-sizing: border-box;
+}
+
+.container h2 {
+  padding: 10px;
+  margin: 10px;
+}
+
+.container .user-table {
+  padding: 10px;
+  /* width: 100%; */
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.container .user-table .name,
+.email,
+.status {
+  width: 10%;
+}
+
+.container .user-table .check {
+  width: 2%;
+}
+
+.container .user-table tr,
+th,
+td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.container .user-table a {
+  color: white;
+  margin-right: 10px;
+  text-decoration: none;
+  background-color: #6d6c6c;
+  padding: 7px;
+  border-radius: 15px;
+}
+
+.container .user-table a:hover {
+  background-color: #333;
 }
 
 .error {
-    color: red;
-    text-transform: capitalize;
-    user-select: none;
+  color: red;
+  text-transform: capitalize;
+  user-select: none;
 }
 
 .link {
-    font-family: consolas;
-    text-decoration: underline;
-    color: #333;
+  font-family: consolas;
+  text-decoration: underline;
+  color: #333;
 }
 
 .header {
-    padding: 10px;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    height: 100px;
+  padding: 10px;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  height: 100px;
 }
 
 .header h2 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .header nav a {
-    position: relative;
-    color: white;
-    text-decoration: none;
-    margin-right: 20px;
+  position: relative;
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
 }
 
 .header nav a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .header nav .active {
-    text-decoration: underline;
-}
- 
-.forget-pass, .auth-form {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  text-decoration: underline;
 }
 
-.forget-pass form, .auth-form form {
-    width: 300px;
-    padding: 20px;
+.forget-pass,
+.auth-form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.forget-pass input, button, .auth-form input {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 300px;
+.forget-pass form,
+.auth-form form {
+  width: 300px;
+  padding: 20px;
 }
 
-.forget-pass input, .auth-form input {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid black;
+.forget-pass input,
+button,
+.auth-form input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 300px;
 }
 
-.forget-pass button, .auth-form button{
-    border-radius: 10px;
-    border: none;   
-    cursor: pointer;
-    width: 330px;
+.forget-pass input,
+.auth-form input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+}
+
+.forget-pass button,
+.auth-form button {
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  width: 330px;
 }
 
 .change-pass {
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.change-pass form{
-    width: 400px;
-    padding: 20px;
+.change-pass form {
+  width: 400px;
+  padding: 20px;
 }
 
-.change-pass input, button {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 300px;
+.change-pass input,
+button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 300px;
 }
 
 .change-pass input {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid black;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
 }
 
-.change-pass button{
-    border-radius: 10px;
-    border: none;   
-    cursor: pointer;
-    width: 330px;
+.change-pass button {
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  width: 330px;
 }
 
-.change-pass {
-    
+.delete-users .btn-delete {
+  width: 10%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+  background-color: #fd0000;
+  color: white;
+}
+
+.dashboard .name, .delete-users .name {
+    text-transform: capitalize;
 }

@@ -64,6 +64,10 @@ class Helper
         $stmt->execute();
     }
 
+    function getAllUsers() {
+        return mysqli_query($this->conn, 'select * from user_info');
+    }
+
     function getUserByEmail($email)
     {
         $stmt = $this->conn->prepare('select * from user_info where email = ?');

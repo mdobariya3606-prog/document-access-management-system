@@ -3,10 +3,11 @@
 
 require '../session.php';
 require '../middleware/auth.php';
-/** @var mysqli $conn */
+require '../middleware/status.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 require '../include/header.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 $oldPassword = $oldPasswordErr = $password = $passwordErr = "";
