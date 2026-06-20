@@ -2,11 +2,11 @@
 <?php
 
 require '../session.php';
-/** @var mysqli $conn */
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 require '../middleware/admin.php';
 require '../include/header.php';
+/** @var mysqli $conn */
 
 $id = $idErr = $password = $passwordErr = "";
 $helper = new Helper($conn);

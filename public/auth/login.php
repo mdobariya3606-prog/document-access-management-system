@@ -1,8 +1,8 @@
 <?php
 include '../session.php';
-/** @var mysqli $conn */
 include '../../config/bootstrap.php';
 include '../functions/Helper.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 $helper->alreadyLoggedIn();

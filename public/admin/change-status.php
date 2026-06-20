@@ -1,10 +1,9 @@
 <?php 
 require '../session.php';
-
-/** @var mysqli $conn */
 require '../../config/bootstrap.php';
 require '../middleware/admin.php';
 require '../functions/Helper.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 $id = $_GET['id'];

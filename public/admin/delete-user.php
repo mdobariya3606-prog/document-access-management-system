@@ -3,11 +3,11 @@
 <?php
 
 require '../session.php';
-/** @var mysqli $conn */
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 require '../middleware/admin.php';
 require '../include/header.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 
@@ -22,11 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ids = implode(',', $_POST['user_ids']);
     
         $sql = mysqli_query($conn, "delete from user_info where id in ($ids)");
-    
+
+        foreach($_POST['user_ids'] as $key => $id) {
+            $directory = '../../uploads/user/' . $id;
+            rmdir($directory);
+        }
+
         header("Location: dashboard.php");
     }
 }
-
 ?>
 
 <!DOCTYPE html>

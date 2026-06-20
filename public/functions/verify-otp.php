@@ -3,8 +3,8 @@
 <?php
 require '../session.php';
 require '../functions/Helper.php';
-/** @var mysqli $conn */
 require '../../config/bootstrap.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 

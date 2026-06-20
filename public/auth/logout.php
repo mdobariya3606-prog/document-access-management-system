@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="../css/style.css">
 <?php
 include '../session.php';
-/** @var mysqli $conn */
 require '../../config/bootstrap.php';
 include '../functions/Helper.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 $helper->isLoggedOut();

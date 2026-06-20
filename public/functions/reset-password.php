@@ -2,9 +2,9 @@
 <?php
 
 require '../session.php';
-/** @var mysqli $conn */
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
+/** @var mysqli $conn */
 
 $otp = $password = $passwordErr = "";
 $helper = new Helper($conn);

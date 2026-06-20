@@ -2,10 +2,10 @@
 include '../session.php';
 require '../middleware/auth.php';
 require '../middleware/status.php';
-/** @var mysqli $conn */
 include '../../config/bootstrap.php';
 include '../functions/Helper.php';
 include '../include/header.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 $file = $message = "";
@@ -32,10 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($message)) {
             $newName = uniqid($_SESSION['user']['id'] . '.', true);
-            $destination = '../../uploads/user/' . $_SESSION['user']['id'] . '/' . $newName . '.' . $extenstion;
+            if ($_SESSION['admin']) {
+                $destination = '../../uploads/admin/' . $newName . '.' . $extenstion;
+            } else {
+                $destination = '../../uploads/user/' . $_SESSION['user']['id'] . '/' . $newName . '.' . $extenstion;
+            }
 
             if (move_uploaded_file($tmpName, $destination)) {
-                $helper->addDocument($fileName, $newName, $fileSize);
+                $helper->addDocument($fileName, $newName, $fileSize, $extenstion);
                 $message = 'file uploaded successfully';
             } else {
                 $message = 'file upload failed';

@@ -64,11 +64,11 @@ class Helper
         $stmt->execute();
     }
 
-    function addDocument($original_name, $file_name, $file_size)
+    function addDocument($original_name, $file_name, $file_size, $extension)
     {
-        $stmt = $this->conn->prepare('insert into document_info (original_name, file_name, file_size, owner_id) values (?, ?, ?, ?)');
+        $stmt = $this->conn->prepare('insert into document_info (original_name, file_name, file_size, extension, owner_id) values (?, ?, ?, ?, ?)');
 
-        $stmt->bind_param('sssi', $original_name, $file_name, $file_size, $_SESSION['user']['id']);
+        $stmt->bind_param('ssssi', $original_name, $file_name, $file_size, $extension, $_SESSION['user']['id']);
         $stmt->execute();
 
         $result = $this->getDocumentByFileName($file_name);

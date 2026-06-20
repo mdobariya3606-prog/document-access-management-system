@@ -3,11 +3,11 @@
 <?php
 
 require '../session.php';
-/** @var mysqli $conn */
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 require '../middleware/admin.php';
 require '../include/header.php';
+/** @var mysqli $conn */
 
 $helper = new Helper($conn);
 
@@ -29,6 +29,7 @@ $users = $helper->getAllUsers();
             <h2>Users</h2>
             <table class="user-table">
                 <tr>
+                    <th class="id">Id</th>
                     <th class="name">Name</th>
                     <th class="email">Email</th>
                     <th class="status">Status</th>
@@ -38,6 +39,7 @@ $users = $helper->getAllUsers();
                     <?php if (mysqli_num_rows($users) > 0) {
                         while ($user = mysqli_fetch_assoc($users)) {
                             if ($user['role'] !== 'ADMIN') { ?>
+                                <td><?php echo $user['id']; ?></td>
                                 <td class="name"><?php echo $user['name']; ?></td>
                                 <td><?php echo $user['email']; ?></td>
                                 <td><?php echo $user['status']; ?></td>

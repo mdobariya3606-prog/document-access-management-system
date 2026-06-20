@@ -263,3 +263,12 @@ button {
 .upload-box input[type="file"] {
   display: none;
 }
+
+.file-box {
+  padding: 20px;
+  margin: 20px auto; 
+  width: 1000px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 15px;
+}

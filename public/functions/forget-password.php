@@ -1,10 +1,10 @@
 <?php
 require '../session.php';
 
-/** @var mysqli $conn */
-/** @var $mail */
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
+/** @var mysqli $conn */
+/** @var $mail */;
 
 $helper = new Helper($conn);
 $email = $emailErr = '';
