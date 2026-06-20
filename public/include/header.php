@@ -20,7 +20,7 @@
 
                 <a href="../admin/delete-user.php" class="<?php echo ($currentPage === 'delete-user.php') ? 'active' : ''; ?>">Delete users</a>
                 <a href="../admin/change-user-password.php" class="<?php echo ($currentPage === 'change-user-password.php') ? 'active' : ''; ?>">Change user password</a> <?php } ?>
-            <a href="add_file.php" class="<?php echo ($currentPage === 'add_file.php') ? 'active' : ''; ?>">Add file</a>
+            <a href="../files/add-file.php" class="<?php echo ($currentPage === 'add_file.php') ? 'active' : ''; ?>">Add file</a>
             <a href="share_file.php" class="<?php echo ($currentPage === 'share_file.php') ? 'active' : ''; ?>">Share file</a>
             <a href="../user/profile.php" class="<?php echo ($currentPage === 'profile.php') ? 'active' : ''; ?>">Profile</a>
             <a href="../user/change-password.php" class="<?php echo ($currentPage === 'change-password.php') ? 'active' : ''; ?>">Reset password</a>

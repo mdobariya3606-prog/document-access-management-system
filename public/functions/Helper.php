@@ -64,7 +64,29 @@ class Helper
         $stmt->execute();
     }
 
-    function updateUser($id, $name, $email) {
+    function addDocument($original_name, $file_name, $file_size)
+    {
+        $stmt = $this->conn->prepare('insert into document_info (original_name, file_name, file_size, owner_id) values (?, ?, ?, ?)');
+
+        $stmt->bind_param('sssi', $original_name, $file_name, $file_size, $_SESSION['user']['id']);
+        $stmt->execute();
+
+        $result = $this->getDocumentByFileName($file_name);
+        $document = $result->fetch_assoc();
+
+        $stmt = $this->conn->prepare('insert into audit_log (user_id, document_id, action) VALUES (?, ?, ?)');
+        if (!$stmt) {
+            die($this->conn->error);
+        }
+        $action = 'UPLOAD';
+        $stmt->bind_param('iis', $_SESSION['user']['id'], $document['document_id'], $action);
+        if (!$stmt->execute()) {
+            die($stmt->error);
+        }
+    }
+
+    function updateUser($id, $name, $email)
+    {
         $stmt = $this->conn->prepare('update user_info set name = ?, email = ? where id = ?');
         $stmt->bind_param('ssi', $name, $email, $id);
         $stmt->execute();
@@ -87,6 +109,14 @@ class Helper
     {
         $stmt = $this->conn->prepare('select * from user_info where id = ?');
         $stmt->bind_param('s', $id);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    function getDocumentByFileName($file_name)
+    {
+        $stmt = $this->conn->prepare('select * from document_info where file_name = ?');
+        $stmt->bind_param('s', $file_name);
         $stmt->execute();
         return $stmt->get_result();
     }

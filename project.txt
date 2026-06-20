@@ -19,7 +19,7 @@ Create a Private Cloud-Based Document Sharing Platform
   ✓ Only email + password login (no social login, no OAuth).
   ✓ Users can register.
   ✓ Password reset and change password features are required.
-  → Basic profile management.
+  ✓ Basic profile management.
 
 • Admin panel
   ✓ Admin can see all users.
@@ -54,7 +54,7 @@ Access Restrictions:
 This is the main system user.
 
 A) Account Management
-→ Update profile (name, email)
+✓ Update profile (name, email)
 ✓ Change password
 → View storage usage (optional but recommended)
 
