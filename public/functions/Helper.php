@@ -83,6 +83,14 @@ class Helper
         if (!$stmt->execute()) {
             die($stmt->error);
         }
+
+        return $document['document_id'];
+    }
+
+    function deleteDocument($id) {
+        $stmt = $this->conn->prepare('delete from document_info where document_id = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
     }
 
     function updateUser($id, $name, $email)
@@ -113,12 +121,26 @@ class Helper
         return $stmt->get_result();
     }
 
+    function getDocumentById($id)
+    {
+        $stmt = $this->conn->prepare('select * from document_info where document_id = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     function getDocumentByFileName($file_name)
     {
         $stmt = $this->conn->prepare('select * from document_info where file_name = ?');
         $stmt->bind_param('s', $file_name);
         $stmt->execute();
         return $stmt->get_result();
+    }
+
+    function addPermission($user_id, $document_id) {
+        $stmt = $this->conn->prepare('insert into document_user_permission (user_id, document_id) values (?, ?)');
+        $stmt->bind_param('ii', $user_id, $document_id);
+        $stmt->execute();
     }
 
     function sendPasswordEmail($user, $mail)

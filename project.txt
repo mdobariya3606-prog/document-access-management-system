@@ -4,8 +4,8 @@ Practical Task
 Create a Private Cloud-Based Document Sharing Platform
 
 • Private document storage
-  → Users can upload files like PDF, DOCX, XLSX, PPT, etc.
-  → Files are stored securely in cloud storage (for now local server).
+  ✓ Users can upload files like PDF, DOCX, XLSX, PPT, etc.
+  ✓ Files are stored securely in cloud storage (for now local server).
   → Nothing is publicly accessible.
 
 • Strict access control
@@ -59,10 +59,10 @@ A) Account Management
 → View storage usage (optional but recommended)
 
 B) Document Management (Owner Side)
-→ Upload document (PDF, DOCX, XLSX, PPT, etc.)
+✓ Upload document (PDF, DOCX, XLSX, PPT, etc.)
 → Store in object storage (local)
 → Create folders (optional but useful)
-→ Rename file
+✓ Rename file
 → Delete file
 → Download file
 → View file details (size, upload date, shared users)

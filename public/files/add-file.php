@@ -39,8 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if (move_uploaded_file($tmpName, $destination)) {
-                $helper->addDocument($fileName, $newName, $fileSize, $extenstion);
+                $original_name = pathinfo($fileName, PATHINFO_FILENAME);
+                $document_id = $helper->addDocument($original_name, $newName, $fileSize, $extenstion);
                 $message = 'file uploaded successfully';
+                $helper->addPermission($_SESSION['user']['id'], $document_id);
             } else {
                 $message = 'file upload failed';
             }

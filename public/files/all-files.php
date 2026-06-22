@@ -1,13 +1,18 @@
 <?php
 require '../session.php';
+require '../middleware/auth.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 include '../include/header.php';
 /** @var mysqli $conn */
 $helper = new Helper($conn);
 
-$stmt = $conn->prepare('select * from document_info where owner_id = ?');
-$stmt->bind_param('i', $_SESSION['user']['id']);
+if ($_SESSION['admin']) {
+    $stmt = $conn->prepare('select d.*, u.name from document_info d join user_info u on d.owner_id = u.id order by u.id');
+} else {
+    $stmt = $conn->prepare('select d.*, u.name from document_info d join user_info u on d.owner_id = u.id where d.owner_id = ?');
+    $stmt->bind_param('i', $_SESSION['user']['id']);
+}
 $stmt->execute();
 
 $result = $stmt->get_result();
@@ -24,16 +29,26 @@ $result = $stmt->get_result();
 </head>
 
 <body>
-    <?php if ($result->num_rows > 0) {
-        while ($file = $result->fetch_assoc()) { ?>
-            <div class="file-box">
-                <h3>Name: <?php echo $file['original_name']; ?></h3>
-                <p>Size: <?php echo $file['file_size']; ?></p>
-                <p>Extension: <?php echo $file['extension']; ?></p>
-                <p>Uploaded at: <?php echo $file['created_at']; ?></p>
-            </div>
-    <?php  }
-    } ?>
+    <div class="file-container">
+        <?php if ($result->num_rows > 0) {
+            while ($file = $result->fetch_assoc()) { ?>
+                <div class="file-box">
+                    <h3><?php echo $file['original_name'] ?></h3>
+
+                    <p>Type: <?php echo $file['extension']; ?></p>
+                    <p>Size: <?php echo round($file['file_size'] / 1000, 2); ?> MB</p>
+                    <p>Owner: <?php echo $file['name']; ?></p>
+                    <p>Uploaded: <?php echo $file['created_at']; ?></p>
+
+                    <div class="actions">
+                        <a href="rename.php?id=<?php echo $file['document_id']; ?>" class="btn">Rename</a>
+                        <a href="#" class="btn">Download</a>
+                        <a href="delete-file.php?id=<?php echo $file['document_id']; ?>" onclick="return confirm('delete this document?')" class="btn delete">Delete</a>
+                    </div>
+                </div>
+        <?php  }
+        } ?>
+    </div>
 </body>
 
 </html>

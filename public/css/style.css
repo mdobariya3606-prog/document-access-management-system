@@ -264,11 +264,56 @@ button {
   display: none;
 }
 
+.file-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
 .file-box {
-  padding: 20px;
-  margin: 20px auto; 
-  width: 1000px;
-  height: 150px;
-  border: 1px solid black;
-  border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.file-box h3 {
+    margin: 0 0 15px;
+    font-size: 18px;
+    word-break: break-word;
+}
+
+.file-box p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #333;
+    transition: 0.2s; 
+}
+
+.btn:hover {
+    background: #f2f2f2;
+}
+
+.delete {
+    border-color: #d9534f;
+    color: #d9534f;
+}
+
+.delete:hover {
+    background: #fff0f0;
 }
