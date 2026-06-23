@@ -29,5 +29,6 @@ if (file_exists($path)) {
     header('Content-Length: ' . filesize($path));
 
     readfile($path);
+    $helper->logDocument($_SESSION['user']['id'], $file['document_id'], 'DOWNLOAD');
     exit;
 }

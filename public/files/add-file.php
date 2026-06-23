@@ -24,10 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $allowed = ['pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx'];
         $extenstion = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
+        // check user storage limit
+        $user_id = $_SESSION['user']['id'];
+        $kb = $helper->getStorageById($user_id);
+        $usage = $kb / (1024 * 1024);
+
         if (!in_array($extenstion, $allowed)) {
             $message = 'invalid file type.';
-        } else if ($fileSize > (10 * 1024 * 1024)) {
-            $message = 'file too large, upload less than 10 MB.';
+        } else if (($usage + ($fileSize / (1024 * 1024))) > 400) {
+            $message = "you're out of storage to upload this file.";
+        } else if ($fileSize > (100 * 1024 * 1024)) {
+            $message = 'file too large, upload less than 100 MB.';
         }
 
         if (empty($message)) {

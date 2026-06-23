@@ -12,13 +12,16 @@
 
 <body>
     <header class="header">
-        <h2>Google Cloud</h2>
+        <h2>DocVault</h2>
         <nav>
 
             <?php if ($_SESSION['admin']) { ?>
                 <a href="../admin/dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>">Dashboard</a>
                 <a href="../admin/manage-users.php" class="<?php echo ($currentPage === 'manage-users.php') ? 'active' : ''; ?>">Manage users</a>
-                <a href="../admin/change-user-password.php" class="<?php echo ($currentPage === 'change-user-password.php') ? 'active' : ''; ?>">Change user password</a> <?php } ?>
+                <a href="../admin/change-user-password.php" class="<?php echo ($currentPage === 'change-user-password.php') ? 'active' : ''; ?>">Change user password</a>
+            <?php } else { ?>
+                <a href="../user/dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>">Dashboard</a>
+            <?php } ?>
             <a href="../files/add-file.php" class="<?php echo ($currentPage === 'add_file.php') ? 'active' : ''; ?>">Add file</a>
             <a href="../files/all-files.php" class="<?php echo ($currentPage === 'all-files.php') ? 'active' : ''; ?>">Manage Files</a>
             <?php if (!$_SESSION['admin']) { ?>

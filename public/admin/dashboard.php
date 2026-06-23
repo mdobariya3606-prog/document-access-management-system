@@ -14,6 +14,16 @@ $helper = new Helper($conn);
 $users = $helper->getAllUsers();
 $storages = $helper->getStoragePerUser();
 $total = $helper->getTotalStorage();
+function checkStorage($usage)
+{
+    if ($usage >= 300) {
+        echo '🔴';
+    } else if ($usage >= 100) {
+        echo '🟡';
+    } else {
+        echo '🟢';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +67,14 @@ $total = $helper->getTotalStorage();
                     <th>User id</th>
                     <th>Storage - KB</th>
                     <th>Storage - MB</th>
+                    <th>Status</th>
                 </tr>
                 <?php while ($storage = $storages->fetch_assoc()) { ?>
                     <tr>
                         <td><?php echo $storage['owner_id']; ?></td>
                         <td><?php echo round($storage['total'] / 1024, 2); ?></td>
                         <td><?php echo round($storage['total'] / (1024 * 1024), 2); ?></td>
+                        <td><b><?php checkStorage($storage['total'] / (1024 * 1024), 2); ?></b></td>
                     </tr>
                 <?php } ?>
 

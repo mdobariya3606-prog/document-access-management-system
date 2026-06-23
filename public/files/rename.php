@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare('update document_info set original_name = ? where document_id = ?');
         $stmt->bind_param('si', $newName, $id);
         $stmt->execute();
+        $helper->logDocument($_SESSION['user']['id'], $file['document_id'], 'RENAME');
 
         header('Location: all-files.php');
     }

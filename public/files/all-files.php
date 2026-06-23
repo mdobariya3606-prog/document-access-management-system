@@ -10,9 +10,20 @@ include '../include/header.php';
 $helper = new Helper($conn);
 
 if ($_SESSION['admin']) {
-    $stmt = $conn->prepare('select d.*, u.name, u.can_share from document_info d join user_info u on d.owner_id = u.id order by u.id');
+    $stmt = $conn->prepare('
+    select d.*, u.name, u.can_share 
+    from document_info d 
+    join user_info u 
+    on d.owner_id = u.id 
+    order by u.id');
 } else {
-    $stmt = $conn->prepare('select d.*, u.name, u.can_share from document_info d join user_info u on d.owner_id = u.id where d.owner_id = ?');
+    $stmt = $conn->prepare('
+    select d.*, u.name, u.can_share 
+    from document_info d 
+    join user_info u 
+    on d.owner_id = u.id 
+    where d.owner_id = ?');
+    
     $stmt->bind_param('i', $_SESSION['user']['id']);
 }
 $stmt->execute();
@@ -38,7 +49,7 @@ $result = $stmt->get_result();
                     <h3><?php echo $file['original_name'] ?></h3>
 
                     <p>Type: <?php echo $file['extension']; ?></p>
-                    <p>Size: <?php echo ceil($file['file_size'] / 1024); ?> KB</p>
+                    <p>Size: <?php echo round($file['file_size'] / (1024 * 1024), 2); ?> MB</p>
                     <p>Owner: <?php echo $file['name']; ?></p>
                     <p>Uploaded: <?php echo date('d-m-Y', strtotime($file['created_at'])); ?></p>
 

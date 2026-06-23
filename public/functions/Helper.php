@@ -56,6 +56,22 @@ class Helper
         }
     }
 
+    function logDocument($user_id, $document_id, $action)
+    {
+        $stmt = $this->conn->prepare(
+            'INSERT INTO audit_log (user_id, document_id, action) VALUES (?, ?, ?)'
+        );
+
+        if (!$stmt) {
+            die($this->conn->error);
+        }
+
+        $stmt->bind_param('iis', $user_id, $document_id, $action);
+        if (!$stmt->execute()) {
+            die($stmt->error);
+        }
+    }
+
     function addUser($name, $email, $password)
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -92,6 +108,7 @@ class Helper
         $stmt = $this->conn->prepare('delete from document_info where document_id = ?');
         $stmt->bind_param('i', $id);
         $stmt->execute();
+        $this->logDocument($_SESSION['user']['id'], $id, 'DELETE_FILE');
     }
 
     function updateUser($id, $name, $email)
