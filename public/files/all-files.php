@@ -38,9 +38,9 @@ $result = $stmt->get_result();
                     <h3><?php echo $file['original_name'] ?></h3>
 
                     <p>Type: <?php echo $file['extension']; ?></p>
-                    <p>Size: <?php echo ceil($file['file_size'] / 1048); ?> KB</p>
+                    <p>Size: <?php echo ceil($file['file_size'] / 1024); ?> KB</p>
                     <p>Owner: <?php echo $file['name']; ?></p>
-                    <p>Uploaded: <?php echo $file['created_at']; ?></p>
+                    <p>Uploaded: <?php echo date('d-m-Y', strtotime($file['created_at'])); ?></p>
 
                     <div class="actions">
                         <a href="rename.php?id=<?php echo $file['document_id']; ?>" class="btn">Rename</a>

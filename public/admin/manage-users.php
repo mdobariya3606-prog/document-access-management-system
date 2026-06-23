@@ -14,6 +14,25 @@ $helper = new Helper($conn);
 $users = $helper->getAllUsers();
 $error = "";
 
+if (isset($_POST['btn-delete'])) {
+    if (empty($_POST['user_ids'])) {
+        $error = "select any user.";
+    } else {
+        $ids = implode(',', $_POST['user_ids']);
+    
+        $sql = mysqli_query($conn, "delete from user_info where id in ($ids)");
+    
+        foreach ($_POST['user_ids'] as $key => $id) {
+            $directory = '../../uploads/user/' . $id;
+            rmdir($directory);
+            if ($_SESSION['user']['id'] == $id) {
+                session_destroy();
+            }
+        }
+        header("Location: dashboard.php");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +49,7 @@ $error = "";
         <div class="delete-users">
             <h2>Users</h2>
             <span class="error"><?php echo $error; ?></span>
-            <form action="../admin/delete-user.php" method="post">
+            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
                 <table class="user-table">
                     <tr>
                         <th class="check">Select Users</th>
@@ -50,7 +69,7 @@ $error = "";
                             }
                         } ?>
                 </table>
-                <button type="submit" class="btn-delete" onclick="return confirm('Sure to delete?')">Delete</button>
+                <button type="submit" class="btn-delete" onclick="return confirm('Sure to delete?')" name="btn-delete">Delete</button>
             </form>
 
             <h2>Manage Access</h2>

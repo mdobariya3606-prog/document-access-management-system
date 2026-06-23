@@ -3,6 +3,7 @@
 <?php
 
 require '../session.php';
+require '../middleware/auth.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 

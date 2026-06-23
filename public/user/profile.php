@@ -39,6 +39,14 @@ $user = mysqli_fetch_assoc($helper->getUserById($_SESSION['user']['id']));
                 <td>Email</td>
                 <td><?php echo $user['email']; ?></td>
             </tr>
+            <tr>
+                <td>Storage usage - KB</td>
+                <td><?php echo round($helper->getStorageById($user['id']) / 1024, 2); ?></td>
+            </tr>
+            <tr>
+                <td>Storage usage - MB</td>
+                <td><?php echo round($helper->getStorageById($user['id']) / (1024 * 1024), 2); ?>MB</td>
+            </tr>
         </table>
         <a href="../user/update-profile.php" class="btn-update">Update profile</a>
     </div>

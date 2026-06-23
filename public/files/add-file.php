@@ -1,9 +1,9 @@
 <?php
 include '../session.php';
+include '../functions/Helper.php';
 require '../middleware/auth.php';
 require '../middleware/status.php';
 include '../../config/bootstrap.php';
-include '../functions/Helper.php';
 include '../include/header.php';
 /** @var mysqli $conn */
 

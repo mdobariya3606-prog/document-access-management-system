@@ -56,7 +56,7 @@ This is the main system user.
 A) Account Management
 ✓ Update profile (name, email)
 ✓ Change password
-→ View storage usage (optional but recommended)
+✓ View storage usage (optional but recommended)
 
 B) Document Management (Owner Side)
 ✓ Upload document (PDF, DOCX, XLSX, PPT, etc.)
@@ -103,7 +103,7 @@ B) Storage Monitoring
 C) Access Control Override
 ✓ Grant or revoke document access manually
 ✓ Force delete any document
-→ Disable sharing for specific users
+✓ Disable sharing for specific users
 
 D) System Monitoring
 

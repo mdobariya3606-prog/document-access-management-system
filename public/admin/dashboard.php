@@ -62,7 +62,7 @@ $total = $helper->getTotalStorage();
                     <tr>
                         <td><?php echo $storage['owner_id']; ?></td>
                         <td><?php echo round($storage['total'] / 1024, 2); ?></td>
-                        <td><?php echo round($storage['total'] / 1024 / 1024, 2); ?></td>
+                        <td><?php echo round($storage['total'] / (1024 * 1024), 2); ?></td>
                     </tr>
                 <?php } ?>
 

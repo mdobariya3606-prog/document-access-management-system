@@ -16,18 +16,18 @@ $user_id = $_SESSION['user']['id'];
 $document_id = $_GET['id'];
 
 $stmt = $conn->prepare('
-SELECT
-    u.*,
-    p.id AS pid,
-    p.type AS permission
-FROM
-    document_user_permission p
-JOIN user_info u ON
-    p.user_id = u.id
-JOIN document_info d ON
-    p.document_id = d.document_id
-WHERE
-    p.document_id = ? AND u.id != d.owner_id and u.role != "ADMIN"');
+    SELECT
+        u.*,
+        p.id AS pid,
+        p.type AS permission
+    FROM
+        document_user_permission p
+    JOIN user_info u ON
+        p.user_id = u.id
+    JOIN document_info d ON
+        p.document_id = d.document_id
+    WHERE
+        p.document_id = ? AND u.id != d.owner_id and u.role != "ADMIN"');
 
 $stmt->bind_param('i', $document_id);
 $stmt->execute();

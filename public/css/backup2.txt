@@ -17,18 +17,11 @@
   width: 100%;
   background-color: #333;
   color: white;
-  height: auto;
-  min-height: 100px;
+  height: 100px;
 }
 
 .header h2 {
   margin-bottom: 10px;
-}
-
-.header nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 
 .header nav a {
@@ -50,11 +43,6 @@
 /* ================================================
    CONTAINER
    ================================================ */
-.container {
-  width: 100%;
-  overflow-x: auto;
-}
-
 .container h2 {
   padding: 10px;
   margin: 10px;
@@ -66,10 +54,9 @@
    ================================================ */
 .container .user-table {
   padding: 10px;
+  /* width: 100%; */
   border-collapse: collapse;
   text-align: left;
-  width: 100%;
-  min-width: 600px;
 }
 
 .container .user-table .name,
@@ -96,8 +83,6 @@ td {
   background-color: #6d6c6c;
   padding: 7px;
   border-radius: 15px;
-  display: inline-block;
-  margin-bottom: 4px;
 }
 
 .container .user-table a:hover {
@@ -112,12 +97,10 @@ td {
   border-collapse: collapse;
   margin: 10px;
   margin-bottom: 30px;
-  width: 100%;
 }
 
 .profile-table {
-  width: 100%;
-  max-width: 600px;
+  width: 50%;
 }
 
 
@@ -130,13 +113,11 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
 .forget-pass form,
 .auth-form form {
-  width: 100%;
-  max-width: 300px;
+  width: 300px;
   padding: 20px;
 }
 
@@ -146,7 +127,7 @@ button,
   display: block;
   margin-bottom: 10px;
   padding: 10px;
-  width: 100%;
+  width: 300px;
 }
 
 .forget-pass input,
@@ -161,7 +142,7 @@ button,
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 330px;
 }
 
 
@@ -169,28 +150,25 @@ button,
    CHANGE PASSWORD & RENAME FORM
    ================================================ */
 .change-pass, .rename-form {
-  height: auto;
-  min-height: 70%;
+  height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
 .rename-form form, .change-pass form {
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
   padding: 20px;
 }
 
-.rename-form input,
+.rename-form input, 
 button,
 .change-pass input,
 button {
   display: block;
   margin-bottom: 10px;
   padding: 10px;
-  width: 100%;
+  width: 300px;
 }
 
 .rename-form input,
@@ -205,7 +183,7 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 330px;
 }
 
 .change-pass form .select-user {
@@ -214,7 +192,7 @@ button {
   text-align: center;
   display: block;
   padding: 10px;
-  width: 100%;
+  width: 90%;
   border-radius: 15px;
 }
 
@@ -224,8 +202,7 @@ button {
    ================================================ */
 .share-files .btn-share,
 .delete-users .btn-delete {
-  width: auto;
-  min-width: 100px;
+  width: 10%;
   padding: 10px;
   border-radius: 10px;
   border: none;
@@ -242,7 +219,6 @@ button {
   border-radius: 10px;
   color: rgba(0, 0, 0, 0.685);
   text-decoration: none;
-  display: inline-block;
 }
 
 .btn-update:hover {
@@ -288,8 +264,7 @@ button {
   text-align: center;
   display: block;
   padding: 10px;
-  width: 100%;
-  max-width: 250px;
+  width: 20%;
   border-radius: 15px;
   margin-bottom: 10px;
 }
@@ -299,10 +274,9 @@ button {
    FILE UPLOAD
    ================================================ */
 .upload-box {
-  width: 100%;
-  max-width: 500px;
+  width: 500px;
   margin: 20px auto;
-  padding: 40px 20px;
+  padding: 40px;
   text-align: center;
   border: 2px dashed #d0d7de;
   border-radius: 12px;
@@ -348,8 +322,7 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  width: 100%;
-  max-width: 330px;
+  width: 330px;
 }
 
 #fileName {
@@ -393,7 +366,6 @@ button {
   margin-top: 15px;
 }
 
-
 /* ================================================
    UTILITIES
    ================================================ */
@@ -407,127 +379,4 @@ button {
   font-family: consolas;
   text-decoration: underline;
   color: #333;
-}
-
-
-/* ================================================
-   RESPONSIVE — TABLET (max 768px)
-   ================================================ */
-@media (max-width: 768px) {
-  .file-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .actions {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .profile-table {
-    width: 100%;
-  }
-
-  .permission-type {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .share-files .btn-share,
-  .delete-users .btn-delete {
-    width: 100%;
-    margin: 6px 0;
-  }
-}
-
-
-/* ================================================
-   RESPONSIVE — MOBILE (max 480px)
-   ================================================ */
-@media (max-width: 480px) {
-  .header {
-    padding: 12px;
-  }
-
-  .header nav a {
-    margin-right: 12px;
-    font-size: 14px;
-  }
-
-  /* Tables scroll horizontally on mobile */
-  .container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .container .user-table {
-    min-width: 480px;
-    font-size: 13px;
-  }
-
-  .container .user-table td,
-  .container .user-table th {
-    padding: 6px 8px;
-  }
-
-  /* Single column file grid */
-  .file-container {
-    grid-template-columns: 1fr;
-  }
-
-  .actions {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  /* Forms full-width */
-  .forget-pass form,
-  .auth-form form {
-    max-width: 100%;
-    padding: 16px;
-  }
-
-  .change-pass form,
-  .rename-form form {
-    max-width: 100%;
-    padding: 16px;
-  }
-
-  .forget-pass button,
-  .auth-form button,
-  .rename-form button,
-  .change-pass button,
-  .upload-file button {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .upload-box {
-    padding: 24px 16px;
-  }
-
-  .upload-icon {
-    font-size: 32px;
-  }
-
-  .btn-update {
-    display: block;
-    margin: 8px 0;
-  }
-
-  .permission-type {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .change-pass form .select-user {
-    width: 100%;
-  }
-
-  .share-files .btn-share,
-  .delete-users .btn-delete {
-    width: 100%;
-    margin: 6px 0;
-  }
-
-  .container h2 {
-    font-size: 18px;
-  }
 }

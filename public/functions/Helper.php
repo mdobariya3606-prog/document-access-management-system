@@ -148,13 +148,30 @@ class Helper
     function getStoragePerUser()
     {
         $result = mysqli_query($this->conn, '
-        SELECT u.id AS owner_id, COALESCE(d.file_size, 0) AS total
+        SELECT u.id AS owner_id,
+        COALESCE(SUM(d.file_size), 0) AS total
         FROM user_info u
-        left JOIN document_info d 
-        ON d.owner_id = u.id
-        GROUP BY u.id');
-        
+        LEFT JOIN document_info d
+            ON d.owner_id = u.id
+        GROUP BY u.id;');
+
         return $result;
+    }
+
+    function getStorageById($id)
+    {
+        $stmt = $this->conn->prepare('
+        select COALESCE(SUM(d.file_size), 0) AS total 
+        from user_info u
+        left join document_info d
+        on d.owner_id = u.id
+        where u.id = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        return $row['total'];
     }
 
     function isOwner($id)
