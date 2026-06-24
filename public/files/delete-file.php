@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../css/style.css">
 <?php
 require '../session.php';
 require '../../config/bootstrap.php';
@@ -9,7 +8,6 @@ require '../middleware/auth.php';
 require '../middleware/status.php';
 require '../middleware/permission.php';
 require '../middleware/file.php';
-include '../include/header.php';
 
 $id = $_GET['id'];
 $user_id = $_SESSION['user']['id'];
@@ -36,6 +34,6 @@ if ($file['owner_id'] == 1) {
 if (file_exists($path)) {
     if (unlink($path)) {
         $helper->deleteDocument($id);
-        header('Location: all-files.php');
+        echo 'success';
     };
 }

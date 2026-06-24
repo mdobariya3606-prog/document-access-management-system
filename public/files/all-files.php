@@ -9,13 +9,6 @@ include '../include/header.php';
 /** @var mysqli $conn */
 $helper = new Helper($conn);
 
-if (!isset($_GET['page']) || empty($_GET['page'])) {
-    $page = 1;
-} else {
-    $page = $_GET['page'];
-}
-
-$offset = ($page - 1) * 9;
 
 if ($_SESSION['admin']) {
     $stmt = $conn->prepare('
@@ -23,18 +16,16 @@ if ($_SESSION['admin']) {
     from document_info d 
     join user_info u 
     on d.owner_id = u.id    
-    order by u.id limit 9 offset ?');
-
-    $stmt->bind_param('i', $offset);
+    order by u.id');
 } else {
     $stmt = $conn->prepare('
     select d.*, u.name, u.can_share 
     from document_info d 
     join user_info u 
     on d.owner_id = u.id 
-    where d.owner_id = ? limit 9 offset ?');
+    where d.owner_id = ?');
 
-    $stmt->bind_param('ii', $_SESSION['user']['id'], $offset);
+    $stmt->bind_param('i', $_SESSION['user']['id']);
 }
 $stmt->execute();
 
@@ -49,13 +40,21 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Files</title>
+    <style>
+        .search {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="file-container">
+    <input type="text" class="search" id="search" placeholder="search files/type/users">
+    <div class="file-container" , id="file-container">
         <?php if ($result->num_rows > 0) {
             while ($file = $result->fetch_assoc()) { ?>
-                <div class="file-box">
+                <div class="file-box" id='file-row-<?php echo $file['document_id']; ?>'>
                     <h3><?php echo $file['original_name'] ?></h3>
 
                     <p>Type: <?php echo $file['extension']; ?></p>
@@ -66,7 +65,8 @@ $result = $stmt->get_result();
                     <div class="actions">
                         <a href="rename.php?id=<?php echo $file['document_id']; ?>" class="btn">Rename</a>
                         <a href="download.php?id=<?php echo $file['document_id']; ?>" class="btn">Download</a>
-                        <a href="delete-file.php?id=<?php echo $file['document_id']; ?>" onclick="return confirm('delete this document?')" class="btn delete">Delete</a>
+
+                        <button onclick="deleteDocument(<?php echo $file['document_id']; ?>)" class="btn delete">Delete</button>
 
                         <?php if ($_SESSION['admin'] || $file['can_share'] == 'YES') { ?>
                             <a href="share-file.php?id=<?php echo $file['document_id']; ?>" class="btn">Share</a>
@@ -76,15 +76,36 @@ $result = $stmt->get_result();
                 </div>
         <?php  }
         } ?>
-
-        <div class="navigation">
-            <a href="?page=<?= $page - 1 ?>">← Previous</a>
-
-            <span>Page <?= $page  ?></span>
-
-            <a href="?page=<?= $page + 1 ?>">Next →</a>
-        </div>
     </div>
 </body>
+
+<script>
+    document.getElementById('search').addEventListener('keyup', function() {
+        let keyword = this.value;
+
+        fetch('../files/search.php?search=' + encodeURIComponent(keyword))
+            .then(response => response.text())
+            .then(data => {
+                document
+                    .getElementById('file-container')
+                    .innerHTML = data;
+            });
+    })
+
+    function deleteDocument(id) {
+        if (confirm('delete this document?')) {
+            fetch('delete-file.php?id=' + id)
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    if (data.trim() === 'success') {
+                        document
+                            .getElementById('file-row-' + id)
+                            .remove();
+                    }
+                })
+        }
+    }
+</script>
 
 </html>

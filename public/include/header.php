@@ -23,9 +23,9 @@
                 <a href="../user/dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>">Dashboard</a>
             <?php } ?>
             <a href="../files/add-file.php" class="<?php echo ($currentPage === 'add_file.php') ? 'active' : ''; ?>">Add file</a>
-            <a href="../files/all-files.php?page=1" class="<?php echo ($currentPage === 'all-files.php') ? 'active' : ''; ?>">Manage Files</a>
+            <a href="../files/all-files.php" class="<?php echo ($currentPage === 'all-files.php') ? 'active' : ''; ?>">Manage Files</a>
             <?php if (!$_SESSION['admin']) { ?>
-                <a href="../files/shared-files.php" class="<?php echo ($currentPage === 'shared-file.php') ? 'active' : ''; ?>">Shared file</a>
+                <a href="../files/shared-files.php" class="<?php echo ($currentPage === 'shared-files.php') ? 'active' : ''; ?>">Shared file</a>
                 <a href="../user/change-password.php" class="<?php echo ($currentPage === 'change-password.php') ? 'active' : ''; ?>">Reset password</a>
             <?php } ?>
             <a href="../user/profile.php" class="<?php echo ($currentPage === 'profile.php') ? 'active' : ''; ?>">Profile</a>
