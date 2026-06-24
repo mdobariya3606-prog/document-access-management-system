@@ -125,8 +125,8 @@ Basic dashboard:
 ✓ File upload service
 ✓ Object storage integration
 ✓ Access validation middleware
-→ Email service (for invite notification + reset password)
-→ API layer (if frontend is separated)
+✓ Email service (for invite notification + reset password)
+x API layer (if frontend is separated)
 → Docker configuration
 ✓ Environment config (.env management)
 

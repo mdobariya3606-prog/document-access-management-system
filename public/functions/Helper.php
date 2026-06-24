@@ -1,6 +1,6 @@
 <?php
-include '../session.php';
-include '../../config/bootstrap.php';
+include __DIR__ . '/../session.php';
+include __DIR__ . '/../../config/bootstrap.php';
 date_default_timezone_set('Asia/Kolkata');
 
 class Helper
@@ -228,6 +228,23 @@ class Helper
         $sql = 'insert into password_reset(user_id, otp, expires_at) values (?, ?, ?)';
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('iss', $user['id'], $otp, $expires_at);
+        $stmt->execute();
+    }
+
+    function sendInviteEmail($mail, $subject, $body) {
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+        $mail->send();
+    }
+
+    function queueMail($sender, $file_name) {
+        $sender = ucfirst($sender);
+        
+        $body = "$sender have gave you access of $file_name";
+        $recipient = "booknest44@gmail.com";
+        $subject = "File Invitation";
+        $stmt = $this->conn->prepare('insert into email_queue (recipient, subject, body) values (?, ?, ?)');
+        $stmt->bind_param('sss', $recipient, $subject, $body);
         $stmt->execute();
     }
 

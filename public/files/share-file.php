@@ -29,6 +29,9 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $document_id);
 $stmt->execute();
 $users = $stmt->get_result();
+
+$file = $helper->getDocumentById($document_id)->fetch_assoc();
+
 $error = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -41,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         foreach ($ids as $id) {
             $helper->addPermission($id, $document_id, $type);
+            $helper->queueMail($_SESSION['user']['name'], $file['original_name'] . '.' . $file['extension']);
             $helper->logShare($_SESSION['user']['id'], $id, $document_id);
         }
 

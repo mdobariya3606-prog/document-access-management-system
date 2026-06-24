@@ -47,7 +47,9 @@ if (isset($_POST['btn-delete'])) {
 <body>
     <div class="container">
         <div class="delete-users">
-            <h2>Users</h2>
+            <a href="../admin/change-user-password.php" class="btn-change-pass">Change user password</a>
+
+            <h2>Delete users</h3>
             <span class="error"><?php echo $error; ?></span>
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
                 <table class="user-table">
@@ -114,13 +116,13 @@ if (isset($_POST['btn-delete'])) {
     function changeStatus(id) {
         fetch('../admin/change-status.php?id=' + id)
             .then(response => response.text())
-            .then(data => document.getElementById('status-'+id).innerText = data);
+            .then(data => document.getElementById('status-' + id).innerText = data);
     }
 
     function changeShareStatus(id) {
         fetch('../admin/change-share-access.php?id=' + id)
             .then(response => response.text())
-            .then(data => document.getElementById('share-access-'+id).innerText = data);
+            .then(data => document.getElementById('share-access-' + id).innerText = data);
     }
 </script>
 

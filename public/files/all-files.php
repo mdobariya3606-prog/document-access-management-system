@@ -50,6 +50,7 @@ $result = $stmt->get_result();
 </head>
 
 <body>
+    <a href="../files/add-file.php" class="btn-add-file">Add File 📄</a>
     <input type="text" class="search" id="search" placeholder="search files/type/users">
     <div class="file-container" , id="file-container">
         <?php if ($result->num_rows > 0) {
