@@ -67,7 +67,7 @@ $result = $stmt->get_result();
                         <a href="rename.php?id=<?php echo $file['document_id']; ?>" class="btn">Rename</a>
                         <a href="download.php?id=<?php echo $file['document_id']; ?>" class="btn">Download</a>
 
-                        <button onclick="deleteDocument(<?php echo $file['document_id']; ?>)" class="btn delete">Delete</button>
+                        <a onclick="deleteDocument(<?php echo $file['document_id']; ?>)" class="btn delete">Delete</a>
 
                         <?php if ($_SESSION['admin'] || $file['can_share'] == 'YES') { ?>
                             <a href="share-file.php?id=<?php echo $file['document_id']; ?>" class="btn">Share</a>

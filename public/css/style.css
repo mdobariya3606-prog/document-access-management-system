@@ -268,10 +268,11 @@ button {
 .btn-change-pass:hover,
 .btn:hover {
   background: #f2f2f2;
+  transition: 0.2s;
 }
 
 .delete {
-  /* padding: 8px 12px; */
+  cursor: pointer;
   border-color: #d9534f;
   color: #d9534f;
 }

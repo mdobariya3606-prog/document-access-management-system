@@ -11,7 +11,8 @@ require '../include/header.php';
 
 $helper = new Helper($conn);
 
-$users = $helper->getAllUsers();
+$users = mysqli_query($conn, 'select u.*, count(*) as t from user_info u join document_info d on u.id = d.owner_id group by u.id');
+
 $storages = $helper->getStoragePerUser();
 $total = $helper->getTotalStorage();
 function checkStorage($usage)
@@ -47,6 +48,7 @@ function checkStorage($usage)
                     <th>Can Share</th>
                     <th>Status</th>
                     <th>Registered at</th>
+                    <th>Total documents</th>
                 </tr>
                 <?php if (mysqli_num_rows($users) > 0) {
                     while ($user = mysqli_fetch_assoc($users)) {
@@ -58,12 +60,12 @@ function checkStorage($usage)
                                 <td><?php echo $user['status']; ?></td>
                                 <td><?php echo $user['can_share']; ?></td>
                                 <td><?php echo date('Y-m-d', strtotime($user['created_at'])); ?></td>
+                                <td><?php echo $user['t']; ?></td>
                             </tr>
                 <?php }
                     }
                 } ?>
             </table>
-
 
             <h2>Storage Usage per user</h2>
             <table class="user-table">

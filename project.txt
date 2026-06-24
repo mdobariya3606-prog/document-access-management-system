@@ -108,9 +108,9 @@ C) Access Control Override
 D) System Monitoring
 
 Audit logs:
-• Who uploaded what
-• Who accessed which file
-• Who shared with whom
+✓ Who uploaded what
+✓ Who accessed which file
+✓ Who shared with whom
 
 Basic dashboard:
 ✓ Total users

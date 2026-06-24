@@ -10,8 +10,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $file = $result->fetch_assoc();
 
-if ($_SESSION['admin']) {
-} else if (!empty($file) || $file['permission'] == "SHARE") {
-} else if (empty($file) || $file['permission'] != "ALL") {
+if (empty($file) || $file['permission'] != "ALL") {
     die('unauthorized');
-}
+} 

@@ -2,6 +2,8 @@
 require '../session.php';
 include '../include/header.php';
 require '../../config/bootstrap.php';
+require '../middleware/auth.php';
+require '../middleware/status.php';
 require '../functions/Helper.php';
 
 /** @var mysqli $conn */
@@ -49,7 +51,7 @@ $stmt = $conn->prepare('
     from document_info d 
     join user_info u 
     on d.owner_id = u.id 
-    where d.owner_id = ? order by created_at limit 5');
+    where d.owner_id = ? order by created_at desc limit 5');
 
 $stmt->bind_param('i', $_SESSION['user']['id']);
 $stmt->execute();

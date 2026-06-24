@@ -39,7 +39,7 @@ $result = $stmt->get_result();
     <div class="file-container">
         <?php if ($result->num_rows > 0) {
             while ($file = $result->fetch_assoc()) { ?>
-                <div class="file-box">
+                <div class="file-box" id="file-box-<?php echo $file['document_id']; ?>">
                     <h3><?php echo $file['original_name'] ?></h3>
 
                     <p>Type: <?php echo $file['extension']; ?></p>
@@ -56,7 +56,7 @@ $result = $stmt->get_result();
                             <a href="share-file.php?id=<?php echo $file['document_id']; ?>" class="btn">Share</a>
                             <a href="rename.php?id=<?php echo $file['document_id']; ?>" class="btn">Rename</a>
 
-                            <a href="delete-file.php?id=<?php echo $file['document_id']; ?>" onclick="return confirm('delete this document?')" class="btn delete">Delete</a>
+                            <a onclick="deleteFile(<?php echo $file['document_id']; ?>)" class="btn delete">Delete</a>
                         <?php } ?>
                     </div>
                 </div>
@@ -64,5 +64,18 @@ $result = $stmt->get_result();
         } ?>
     </div>
 </body>
+<script>
+    function deleteFile(id) {
+        if (confirm('delete this document?')) {
+            fetch('../files/delete-file.php?id=' + id)
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'success') {
+                        document.getElementById('file-box-' + id).remove();
+                    }
+                })
+        }
+    }
+</script>
 
 </html>
