@@ -2,7 +2,7 @@
 require '../session.php';
 require '../functions/Helper.php';
 require '../middleware/auth.php';
-require '../middleware/status.php';
+require '../middleware/admin.php';
 require '../../config/bootstrap.php';
 include '../include/header.php';
 
@@ -11,23 +11,16 @@ $helper = new Helper($conn);
 
 $current_path = 'uploads/' . $helper->getFolderPath($_SESSION['folder']['id']);
 
-if ($_SESSION['admin']) {
-    $stmt = $conn->prepare('
-    select d.*, u.name, u.can_share 
-    from document_info d 
-    join user_info u 
-    on d.owner_id = u.id    
-    order by u.id');
-} else {
-    $stmt = $conn->prepare('
+
+$stmt = $conn->prepare('
     select d.*, u.name, u.can_share 
     from document_info d 
     join user_info u 
     on d.owner_id = u.id 
     where d.folder_id = ?');
 
-    $stmt->bind_param('i', $_SESSION['folder']['id']);
-}
+$stmt->bind_param('i', $_SESSION['folder']['id']);
+
 $stmt->execute();
 
 $result = $stmt->get_result();
@@ -59,46 +52,41 @@ $folders = $stmt->get_result();
 </head>
 
 <body>
-    <?php if (!$_SESSION['admin']) { ?>
-        <div class="folder-container">
-            <div class="curr-folder">
-                <p><span>Current Folder:</span> <?php echo $current_path ?></p>
-            </div>
+    <div class="curr-folder">
+        <p><span>Current Folder:</span> <?php echo $current_path ?></p>
+    </div>
+    <a href="../admin/add-folder.php" class="btn-add-file">Add Folder 📁</a>
+    <a href="../admin/add-file.php" class="btn-add-file">Add File 📄</a>
 
-            <a href="../files/add-folder.php" class="btn-add-file">Add Folder 📁</a>
-            <a href="../files/add-file.php" class="btn-add-file">Add File 📄</a>
-            <table class="folder-table">
+    <div class="folder-container">
+        <table class="folder-table">
 
+            <tr>
+                <th>Folder name</th>
+                <th>Delete</th>
+            </tr>
+
+            <?php if ($_SESSION['admin'] && $_SESSION['folder']['parent_id'] != null) { ?>
                 <tr>
-                    <th>Folder name</th>
-                    <th>Delete</th>
+                    <td>
+                        <a href="../admin/previous.php" class="btn-previous">..</a>
+                    </td>
                 </tr>
+            <?php } ?>
 
-                <?php if (
-                    ($_SESSION['admin'] && $_SESSION['folder']['parent_id'] != null)
-                    || !$_SESSION['admin'] && $_SESSION['folder']['parent_id'] != 1
-                ) { ?>
-                    <tr>
-                        <td>
-                            <a href="../files/previous.php" class="btn-previous">..</a>
-                        </td>
-                    </tr>
-                <?php } ?>
+            <?php while ($folder = $folders->fetch_assoc()) { ?>
+                <tr id="folder-row-<?php echo $folder['id']; ?>">
+                    <td>
+                        <a href="../admin/open-folder.php?id=<?php echo $folder['id'] ?>" class="folder-name"><?php echo $folder['folder_name']; ?>/</a>
+                    </td>
+                    <td>
+                        <a onclick="deleteFolder(<?php echo $folder['id']; ?>)" class="btn delete">delete-folder</a>
+                    </td>
+                </tr>
+            <?php } ?>
 
-                <?php while ($folder = $folders->fetch_assoc()) { ?>
-                    <tr id="folder-row-<?php echo $folder['id']; ?>">
-                        <td>
-                            <a href="../files/open-folder.php?id=<?php echo $folder['id'] ?>" class="folder-name"><?php echo $folder['folder_name']; ?>/</a>
-                        </td>
-                        <td>
-                            <a onclick="deleteFolder(<?php echo $folder['id']; ?>)" class="btn delete">delete-folder</a>
-                        </td>
-                    </tr>
-                <?php } ?>
-
-            </table>
-        </div>
-    <?php } ?>
+        </table>
+    </div>
 
     <input type="text" class="search" id="search" placeholder="search files/type/users">
 
@@ -114,14 +102,14 @@ $folders = $stmt->get_result();
                     <p>Uploaded: <?php echo date('d-m-Y', strtotime($file['created_at'])); ?></p>
 
                     <div class="actions">
-                        <a href="rename.php?id=<?php echo $file['document_id']; ?>" class="btn">Rename</a>
-                        <a href="download.php?id=<?php echo $file['document_id']; ?>" class="btn">Download</a>
+                        <a href="../files/rename.php?id=<?php echo $file['document_id']; ?>" class="btn">Rename</a>
+                        <a href="../files/download.php?id=<?php echo $file['document_id']; ?>" class="btn">Download</a>
 
                         <a onclick="deleteDocument(<?php echo $file['document_id']; ?>)" class="btn delete">Delete</a>
 
                         <?php if ($_SESSION['admin'] || $file['can_share'] == 'YES') { ?>
-                            <a href="share-file.php?id=<?php echo $file['document_id']; ?>" class="btn">Share</a>
-                            <a href="permissions.php?id=<?php echo $file['document_id']; ?>" class="btn">Permissions</a>
+                            <a href="../files/share-file.php?id=<?php echo $file['document_id']; ?>" class="btn">Share</a>
+                            <a href="../files/permissions.php?id=<?php echo $file['document_id']; ?>" class="btn">Permissions</a>
                         <?php } ?>
                     </div>
                 </div>
@@ -134,7 +122,7 @@ $folders = $stmt->get_result();
     document.getElementById('search').addEventListener('keyup', function() {
         let keyword = this.value;
 
-        fetch('../files/search.php?search=' + encodeURIComponent(keyword))
+        fetch('../admin/search.php?search=' + encodeURIComponent(keyword))
             .then(response => response.text())
             .then(data => {
                 document

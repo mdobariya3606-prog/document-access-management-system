@@ -431,9 +431,36 @@ td {
   border-radius: 4px;
 }
 
-.folder-table a {
+.folder-table .delete {
+  text-decoration: underline;
+  border: none;
 }
 
+.curr-folder {
+  padding: 10px;
+  margin: 10px;
+}
+
+.btn-previous,
+.folder-name {
+  color: rgb(63, 42, 255);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: underline;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.curr-folder span {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.curr-folder p {
+  font-family: consolas;
+  text-decoration: underline;
+}
 
 /* ================================================
    UTILITIES

@@ -18,17 +18,17 @@ if (isset($_POST['btn-delete'])) {
     if (empty($_POST['user_ids'])) {
         $error = "select any user.";
     } else {
-        $ids = implode(',', $_POST['user_ids']);
-
-        $sql = mysqli_query($conn, "delete from user_info where id in ($ids)");
 
         foreach ($_POST['user_ids'] as $key => $id) {
-            $directory = '../../uploads/user/' . $id;
-            rmdir($directory);
+            $helper->deleteUserFolder($id);
             if ($_SESSION['user']['id'] == $id) {
                 session_destroy();
             }
         }
+
+        $ids = implode(',', $_POST['user_ids']);
+        $sql = mysqli_query($conn, "delete from user_info where id in ($ids)");
+
         $users = $helper->getAllUsers();
     }
 }
@@ -50,63 +50,63 @@ if (isset($_POST['btn-delete'])) {
             <a href="../admin/change-user-password.php" class="btn-change-pass">Change user password</a>
 
             <h2>Delete users</h3>
-            <span class="error"><?php echo $error; ?></span>
-            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+                <span class="error"><?php echo $error; ?></span>
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+                    <table class="user-table">
+                        <tr>
+                            <th class="check">Select Users</th>
+                            <th class="name">Name</th>
+                            <th class="email">Email</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            if (mysqli_num_rows($users) > 0) {
+                                while ($user = mysqli_fetch_assoc($users)) {
+                                    if ($user['role'] !== 'ADMIN') { ?>
+                                        <td><input type="checkbox" name="user_ids[]" value="<?php echo $user['id']; ?>" id=""></td>
+                                        <td class="name"><?php echo $user['name']; ?></td>
+                                        <td><?php echo $user['email']; ?></td>
+                        </tr>
+            <?php }
+                                }
+                            } ?>
+                    </table>
+                    <button type="submit" class="btn-delete" onclick="return confirm('Sure to delete?')" name="btn-delete">Delete</button>
+                </form>
+
+                <h2>Manage Access</h2>
                 <table class="user-table">
                     <tr>
-                        <th class="check">Select Users</th>
-                        <th class="name">Name</th>
-                        <th class="email">Email</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Can Share</th>
+                        <th>Change status</th>
+                        <th>Change share access</th>
                     </tr>
-                    <tr>
-                        <?php
-                        if (mysqli_num_rows($users) > 0) {
-                            while ($user = mysqli_fetch_assoc($users)) {
-                                if ($user['role'] !== 'ADMIN') { ?>
-                                    <td><input type="checkbox" name="user_ids[]" value="<?php echo $user['id']; ?>" id=""></td>
+                    <?php
+                    $users = $helper->getAllUsers();
+                    if (mysqli_num_rows($users) > 0) {
+                        while ($user = mysqli_fetch_assoc($users)) {
+                            if ($user['role'] !== 'ADMIN') { ?>
+                                <tr>
+                                    <td><?php echo $user['id']; ?></td>
                                     <td class="name"><?php echo $user['name']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
-                    </tr>
-        <?php }
-                            }
-                        } ?>
+                                    <td id="status-<?php echo $user['id']; ?>"><?php echo $user['status']; ?></td>
+                                    <td id="share-access-<?php echo $user['id']; ?>"><?php echo $user['can_share']; ?></td>
+                                    <td>
+                                        <button class="btn-change" onclick="changeStatus(<?php echo $user['id']; ?>)">Change Status</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn-change" onclick="changeShareStatus(<?php echo $user['id']; ?>)">Change Share Access</button>
+                                    </td>
+                                </tr>
+                    <?php }
+                        }
+                    } ?>
                 </table>
-                <button type="submit" class="btn-delete" onclick="return confirm('Sure to delete?')" name="btn-delete">Delete</button>
-            </form>
-
-            <h2>Manage Access</h2>
-            <table class="user-table">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Can Share</th>
-                    <th>Change status</th>
-                    <th>Change share access</th>
-                </tr>
-                <?php
-                $users = $helper->getAllUsers();
-                if (mysqli_num_rows($users) > 0) {
-                    while ($user = mysqli_fetch_assoc($users)) {
-                        if ($user['role'] !== 'ADMIN') { ?>
-                            <tr>
-                                <td><?php echo $user['id']; ?></td>
-                                <td class="name"><?php echo $user['name']; ?></td>
-                                <td><?php echo $user['email']; ?></td>
-                                <td id="status-<?php echo $user['id']; ?>"><?php echo $user['status']; ?></td>
-                                <td id="share-access-<?php echo $user['id']; ?>"><?php echo $user['can_share']; ?></td>
-                                <td>
-                                    <button class="btn-change" onclick="changeStatus(<?php echo $user['id']; ?>)">Change Status</button>
-                                </td>
-                                <td>
-                                    <button class="btn-change" onclick="changeShareStatus(<?php echo $user['id']; ?>)">Change Share Access</button>
-                                </td>
-                            </tr>
-                <?php }
-                    }
-                } ?>
-            </table>
 
         </div>
     </div>

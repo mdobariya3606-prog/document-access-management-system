@@ -25,7 +25,7 @@ if ($result->num_rows == 0) {
 }
 $file = $result->fetch_assoc();
 
-$path = '../../uploads/' . $helper->getFolderPath($_SESSION['folder']['id']) . '/' . $file['file_name'] . '.' . $file['extension'];
+$path = '../../uploads/' . $helper->getFolderPath($file['folder_id']) . '/' . $file['file_name'] . '.' . $file['extension'];
 
 if (file_exists($path)) {
     if (unlink($path)) {

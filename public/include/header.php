@@ -18,6 +18,7 @@
             <?php if ($_SESSION['admin']) { ?>
                 <a href="../admin/dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>">Dashboard</a>
                 <a href="../admin/manage-users.php" class="<?php echo ($currentPage === 'manage-users.php') ? 'active' : ''; ?>">Manage users</a>
+                <a href="../admin/my-files.php" class="<?php echo ($currentPage === 'my-files.php') ? 'active' : ''; ?>">My files</a>
             <?php } else { ?>
                 <a href="../user/dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>">Dashboard</a>
             <?php } ?>

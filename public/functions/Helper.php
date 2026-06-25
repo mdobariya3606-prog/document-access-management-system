@@ -127,6 +127,18 @@ class Helper
         return $this->getFolderPath($folder['parent_id']) . '/' . $folder['folder_name'];
     }
 
+    function deleteUserFolder($id)
+    {
+        $stmt = $this->conn->prepare('select id from user_folder where user_id = ? and parent_id = 1');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $this->deleteFolder($result->fetch_assoc()['id']);
+        }
+    }
+
     function deleteFolder($folder_id)
     {
 
@@ -139,56 +151,50 @@ class Helper
             throw new Exception("Can't delete root directory.");
         }
 
-        $this->conn->begin_transaction();
+        // delete child folders
 
-        try {
-            // delete child folders
+        $stmt = $this->conn->prepare('select * from user_folder where parent_id = ?');
+        $stmt->bind_param('i', $folder_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-            $stmt = $this->conn->prepare('select * from user_folder where parent_id = ?');
-            $stmt->bind_param('i', $folder_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            while ($row = $result->fetch_assoc()) {
-                $this->deleteFolder($row['id']);
-            }
-
-            // delete files
-            $stmt = $this->conn->prepare('select file_name, extension from document_info where folder_id = ?');
-            $stmt->bind_param('i', $folder_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            $path = '../../uploads/' . $this->getFolderPath($folder_id);
-
-            while ($file = $result->fetch_assoc()) {
-                $filePath = $path . DIRECTORY_SEPARATOR . $file['file_name'] . '.' . $file['extension'];
-                if (file_exists($filePath)) {
-                    unlink($filePath);
-                }
-            }
-
-            // delete files from database
-
-            $stmt = $this->conn->prepare('delete from document_info where folder_id = ?');
-            $stmt->bind_param('i', $folder_id);
-            $stmt->execute();
-
-            // delete physical folder
-            if (is_dir($path)) {
-                rmdir($path);
-            }
-
-            // delete folder from db
-
-            $stmt = $this->conn->prepare('delete from user_folder where id = ?');
-            $stmt->bind_param('i', $folder_id);
-            $stmt->execute();
-
-            $this->conn->commit();
-        } catch (Exception $e) {
-            $this->conn->rollback();
+        while ($row = $result->fetch_assoc()) {
+            $this->deleteFolder($row['id']);
         }
+
+        // delete files
+        $stmt = $this->conn->prepare('select file_name, extension from document_info where folder_id = ?');
+        $stmt->bind_param('i', $folder_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $path = '../../uploads/' . $this->getFolderPath($folder_id);
+
+        while ($file = $result->fetch_assoc()) {
+            $filePath = $path . DIRECTORY_SEPARATOR . $file['file_name'] . '.' . $file['extension'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        // delete files from database
+
+        $stmt = $this->conn->prepare('delete from document_info where folder_id = ?');
+        $stmt->bind_param('i', $folder_id);
+        $stmt->execute();
+
+        // delete physical folder
+        if (is_dir($path)) {
+            if (!rmdir($path)) {
+                die(error_get_last()['message']);
+            }
+        }
+
+        // delete folder from db
+
+        $stmt = $this->conn->prepare('delete from user_folder where id = ?');
+        $stmt->bind_param('i', $folder_id);
+        $stmt->execute();
     }
 
     function updateUser($id, $name, $email)
