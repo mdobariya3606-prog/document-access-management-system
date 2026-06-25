@@ -105,18 +105,17 @@ td {
 /* ================================================
    PROFILE TABLE
    ================================================ */
-.container .profile-table {
+.profile-table {
   border-collapse: collapse;
   margin: 10px;
   margin-bottom: 30px;
-  width: 100%;
+  max-width: 100%;
   text-align: left;
 }
 
-.profile-table {
-  width: 100%;
+/* .profile-table {
   max-width: 600px;
-}
+} */
 
 /* ================================================
    AUTH FORMS (Login / Register)

@@ -41,8 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $email = $row['email'];
 
                 $_SESSION['user'] = $row;
+
                 $_SESSION['admin'] = ($_SESSION['user']['role'] == 'ADMIN') ? true : false;
-                setcookie('remember_me', $email, time() + 86400, '/');
+
+                if (!$_SESSION['admin']) {
+                    $folder = mysqli_query($conn, 'select * from user_folder where parent_id = 1 and user_id = ' . $row['id'])->fetch_assoc();
+                } else {
+                    $folder = mysqli_query($conn, 'select * from user_folder where user_id = ' . $row['id'])->fetch_assoc();
+                }
+
+                $_SESSION['folder'] = $folder;
 
                 $helper->logAction($_SESSION['user']['id'], 'LOGIN');
 
@@ -51,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     header("Location: ../user/dashboard.php");
                 }
-
             } else {
                 $emailErr = "wrong email or password";
             }

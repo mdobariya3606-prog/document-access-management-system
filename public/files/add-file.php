@@ -10,6 +10,7 @@ include '../include/header.php';
 $helper = new Helper($conn);
 $file = $message = "";
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $file = $_FILES['document'];
 
@@ -39,11 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($message)) {
             $newName = uniqid($_SESSION['user']['id'] . '.', true);
-            if ($_SESSION['admin']) {
-                $destination = '../../uploads/admin/' . $newName . '.' . $extenstion;
-            } else {
-                $destination = '../../uploads/user/' . $_SESSION['user']['id'] . '/' . $newName . '.' . $extenstion;
-            }
+            $destination = '../../uploads/' . $helper->getFolderPath($_SESSION['folder']['id']) . '/' . $newName . '.' . $extenstion;
+
 
             if (move_uploaded_file($tmpName, $destination)) {
                 $original_name = pathinfo($fileName, PATHINFO_FILENAME);

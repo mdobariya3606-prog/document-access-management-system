@@ -10,6 +10,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $file = $result->fetch_assoc();
 
-if (empty($file) || $file['permission'] != "ALL") {
+if ($_SESSION['admin']) {
+} else if (empty($file) || $file['permission'] != "ALL") {
     die('unauthorized');
-} 
+}

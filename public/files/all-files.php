@@ -9,6 +9,9 @@ include '../include/header.php';
 /** @var mysqli $conn */
 $helper = new Helper($conn);
 
+echo "<pre>";
+echo 'uploads/' . $helper->getFolderPath($_SESSION['folder']['id']);
+echo "</pre>";
 
 if ($_SESSION['admin']) {
     $stmt = $conn->prepare('
@@ -23,13 +26,18 @@ if ($_SESSION['admin']) {
     from document_info d 
     join user_info u 
     on d.owner_id = u.id 
-    where d.owner_id = ?');
+    where d.folder_id = ?');
 
-    $stmt->bind_param('i', $_SESSION['user']['id']);
+    $stmt->bind_param('i', $_SESSION['folder']['id']);
 }
 $stmt->execute();
 
 $result = $stmt->get_result();
+
+$stmt = $conn->prepare('select * from user_folder where parent_id = ?');
+$stmt->bind_param('s', $_SESSION['folder']['id']);
+$stmt->execute();
+$folders = $stmt->get_result();
 
 ?>
 
@@ -50,8 +58,37 @@ $result = $stmt->get_result();
 </head>
 
 <body>
+    <a href="../files/add-folder.php" class="btn-add-file">Add Folder 📁</a>
     <a href="../files/add-file.php" class="btn-add-file">Add File 📄</a>
     <input type="text" class="search" id="search" placeholder="search files/type/users">
+
+    <div class="folder-container">
+        <table class="profile-table">
+            <thead>
+                <tr>
+                    <th>folder_name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php if ($_SESSION['folder']['parent_id'] != 1 && $_SESSION['folder']['parent_id'] != null) { ?>
+                    <tr>
+                        <td>
+                            <a href="../files/previous.php">..</a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    <?php while ($folder = $folders->fetch_assoc()) { ?>
+                        <tr>
+                            <td>
+                                <a href="../files/open-folder.php?id=<?php echo $folder['id'] ?>"><?php echo $folder['folder_name']; ?></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+            </tbody>
+        </table>
+    </div>
+
     <div class="file-container" , id="file-container">
         <?php if ($result->num_rows > 0) {
             while ($file = $result->fetch_assoc()) { ?>

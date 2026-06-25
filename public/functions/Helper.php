@@ -82,9 +82,9 @@ class Helper
 
     function addDocument($original_name, $file_name, $file_size, $extension)
     {
-        $stmt = $this->conn->prepare('insert into document_info (original_name, file_name, file_size, extension, owner_id) values (?, ?, ?, ?, ?)');
+        $stmt = $this->conn->prepare('insert into document_info (original_name, file_name, file_size, extension, owner_id, folder_id) values (?, ?, ?, ?, ?, ?)');
 
-        $stmt->bind_param('ssssi', $original_name, $file_name, $file_size, $extension, $_SESSION['user']['id']);
+        $stmt->bind_param('ssssii', $original_name, $file_name, $file_size, $extension, $_SESSION['user']['id'], $_SESSION['folder']['id']);
         $stmt->execute();
 
         $result = $this->getDocumentByFileName($file_name);
@@ -109,6 +109,22 @@ class Helper
         $stmt->bind_param('i', $id);
         $stmt->execute();
         // $this->logDocument($_SESSION['user']['id'], $id, 'DELETE_FILE');
+    }
+
+    function getFolderPath($id)
+    {
+        $stmt = $this->conn->prepare('select * from user_folder where id = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $folder = $stmt->get_result()->fetch_assoc();
+
+        if ($folder['folder_name'] === 'user') {
+            return 'user';
+        } else if ($folder['folder_name'] === 'admin') {
+            return 'admin';
+        }
+
+        return $this->getFolderPath($folder['parent_id']) . '/' . $folder['folder_name'];
     }
 
     function updateUser($id, $name, $email)
@@ -208,7 +224,8 @@ class Helper
         $stmt->execute();
     }
 
-    function logShare($sender_id, $receiver_id, $document_id) {
+    function logShare($sender_id, $receiver_id, $document_id)
+    {
         $stmt = $this->conn->prepare('insert into share_log (sender_id , receiver_id, document_id) values (?, ?, ?)');
         $stmt->bind_param('iii', $sender_id, $receiver_id, $document_id);
         $stmt->execute();
@@ -231,15 +248,17 @@ class Helper
         $stmt->execute();
     }
 
-    function sendInviteEmail($mail, $subject, $body) {
+    function sendInviteEmail($mail, $subject, $body)
+    {
         $mail->Subject = $subject;
         $mail->Body = $body;
         $mail->send();
     }
 
-    function queueMail($sender, $file_name) {
+    function queueMail($sender, $file_name)
+    {
         $sender = ucfirst($sender);
-        
+
         $body = "$sender have gave you access of $file_name";
         $recipient = "booknest44@gmail.com";
         $subject = "File Invitation";
