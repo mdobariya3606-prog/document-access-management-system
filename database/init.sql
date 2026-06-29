@@ -35,10 +35,6 @@ CREATE TABLE `audit_log` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `audit_log`
---
-
 -- --------------------------------------------------------
 
 --
@@ -52,9 +48,6 @@ CREATE TABLE `delete_log` (
   `deleted_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `delete_log`
---
 
 -- --------------------------------------------------------
 
@@ -86,10 +79,6 @@ CREATE TABLE `document_user_permission` (
   `type` enum('DOWNLOAD','SHARE','ALL') NOT NULL DEFAULT 'DOWNLOAD'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `document_user_permission`
---
-
 -- --------------------------------------------------------
 
 --
@@ -105,10 +94,6 @@ CREATE TABLE `email_queue` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `sent_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `email_queue`
---
 
 -- --------------------------------------------------------
 
@@ -156,7 +141,7 @@ CREATE TABLE `user_folder` (
 
 INSERT INTO `user_folder` (`id`, `folder_name`, `user_id`, `parent_id`) VALUES
 (1, 'user', NULL, NULL),
-(12, 'admin', 1, NULL);
+(2, 'admin', 1, NULL);
 
 -- --------------------------------------------------------
 
