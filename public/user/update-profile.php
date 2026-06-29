@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailErr = $helper->checkRequire($email);
 
     if (empty($nameErr) && !preg_match('/^[a-zA-Z ]*$/', $name)) {
-        $nameErr = 'only character allowed';
+        $nameErr = 'Only character allowed';
     } elseif (empty($emailErr) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = 'wrong email format';
+        $emailErr = 'Wrong email format';
     }
 
     if (empty($nameErr) && empty($emailErr)) {

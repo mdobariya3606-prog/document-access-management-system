@@ -202,3 +202,28 @@ Learning: [04:00:00]
 - Created and attached a Docker volume for persistent data.
 - Built and ran the application using Docker Compose.
 - Pushed the Docker image to Docker Hub as `ddsmeet/testapp`.
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Date: June 29, 2026
+
+Accomplishments
+
+Learning: [08:20:00]
+
+- Configured Docker for the PHP and MySQL project.
+- Created Dockerfile and docker-compose.yml for the project.
+- Built and ran the project using Docker Compose.
+- Configured the project to run on port 8080 and phpMyAdmin on port 8081.
+- Made the project responsive for mobile devices.
+- Created an SQL initialization file to automatically create the database, tables, and default admin account in a fresh container.
+- Verified the required Docker and Apache configuration for serving the project from the public directory.
+- Added .gitkeep to preserve empty upload directories in Git.
+- Updated .gitignore to exclude uploaded files from version control.
+- Removed the user_id foreign key from the audit_log table to retain logs after user deletion.
+- Moved the header include to prevent rendering errors.
+- Allowed underscore (`_`) characters in file rename functionality.
+- Completed the Document Access Management System project.
+- Resolved Git push conflicts caused by the remote repository being ahead.
+- Updated the Git author email and rewrote commit history with the correct email.
+- Cleaned the repository by removing uploaded files from version control.

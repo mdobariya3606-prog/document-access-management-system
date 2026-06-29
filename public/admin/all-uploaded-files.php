@@ -16,7 +16,6 @@ try {
     $current_path = 'Unavailable';
 }
 
-
 $stmt = $conn->prepare('
     select d.*, u.name, u.can_share 
     from document_info d 
