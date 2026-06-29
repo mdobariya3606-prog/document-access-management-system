@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->begin_transaction();
         try {
             foreach ($_POST['user_ids'] as $id) {
+                $helper->logAction($id, 'USER_DELETED');
                 $helper->deleteUserFolder($id);
             }
 

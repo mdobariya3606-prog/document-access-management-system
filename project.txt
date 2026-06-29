@@ -127,7 +127,7 @@ Basic dashboard:
 ✓ Access validation middleware
 ✓ Email service (for invite notification + reset password)
 x API layer (if frontend is separated)
-→ Docker configuration
+✓ Docker configuration
 ✓ Environment config (.env management)
 
 
