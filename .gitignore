@@ -3,3 +3,13 @@
 .env
 node_modules
 .extra
+
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.csv
+*.ppt
+*.pptx
+*.zip
