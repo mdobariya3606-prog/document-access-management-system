@@ -543,11 +543,15 @@ project/
 
 ### Admin Dashboard
 
-<img width="1351" height="632" alt="Admin Dashboard" src="https://github.com/user-attachments/assets/664c8267-4b9e-4827-a2f9-8bc6f4f2a2d3" />
+<img width="1364" height="628" alt="Screenshot_20" src="https://github.com/user-attachments/assets/eded1bd3-48eb-43d8-93e9-d536f82b92d3" />
 
 ### Manage files
 
 <img width="1352" height="633" alt="Manage files" src="https://github.com/user-attachments/assets/6715d660-09ce-4f95-a3f8-295443865c81" />
+
+### All Uploaded Files
+
+<img width="1352" height="621" alt="image" src="https://github.com/user-attachments/assets/c9b6eb71-4d0e-4759-82f4-1ce6ae8bee22" />
 
 ### Upload Document
 
