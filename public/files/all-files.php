@@ -2,6 +2,7 @@
 require '../session.php';
 require '../functions/Helper.php';
 require '../middleware/auth.php';
+require '../middleware/status.php';
 require '../../config/bootstrap.php';
 
 /** @var mysqli $conn */

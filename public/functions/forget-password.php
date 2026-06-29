@@ -44,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="forget-pass">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <span class="error"><?php echo htmlspecialchars($emailErr); ?></span>
+            <span class="error"><?php echo ($emailErr); ?></span>
             <input type="email" name="email" id="email" placeholder="Enter Email">
-            
+
             <button type="submit">send code</button>
         </form>
     </div>

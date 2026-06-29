@@ -156,7 +156,7 @@ CREATE TABLE `user_folder` (
 
 INSERT INTO `user_folder` (`id`, `folder_name`, `user_id`, `parent_id`) VALUES
 (1, 'user', NULL, NULL),
-(12, 'admin', 1, NULL),
+(12, 'admin', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,7 +180,7 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`id`, `name`, `email`, `password`, `role`, `status`, `can_share`, `created_at`) VALUES
-(1, 'admin', 'admin@dds.com', '$2y$10$R1kiK6ggT4dqtHtkRfQKpePUm33nWqU8kqakmrg6CjpllOeeDp2w2', 'ADMIN', 'ACTIVE', 'YES', '2026-06-19 09:24:40'),
+(1, 'admin', 'admin@dds.com', '$2y$10$R1kiK6ggT4dqtHtkRfQKpePUm33nWqU8kqakmrg6CjpllOeeDp2w2', 'ADMIN', 'ACTIVE', 'YES', '2026-06-19 09:24:40');
 
 --
 -- Indexes for dumped tables

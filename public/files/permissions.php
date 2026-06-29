@@ -9,6 +9,7 @@ $helper = new Helper($conn);
 
 require '../middleware/auth.php';
 require '../middleware/status.php';
+require '../middleware/share-access.php';
 require '../middleware/file.php';
 
 $document_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

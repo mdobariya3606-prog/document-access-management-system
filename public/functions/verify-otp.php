@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="forget-pass">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <span class="error"><?php echo htmlspecialchars($otpErr); ?></span>
+            <span class="error"><?php echo ($otpErr); ?></span>
             <input type="text" name="otp" id="otp" placeholder="Otp">
 
             <button type="submit">reset-password</button>

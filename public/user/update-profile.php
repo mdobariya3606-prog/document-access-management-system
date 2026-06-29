@@ -64,10 +64,10 @@ require '../include/header.php';
     <div class="auth-form">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 
-            <span class="error"><?php echo htmlspecialchars($nameErr); ?></span>
+            <span class="error"><?php echo ($nameErr); ?></span>
             <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($name ?: $_SESSION['user']['name']); ?>" placeholder="Name">
 
-            <span class="error"><?php echo htmlspecialchars($emailErr); ?></span>
+            <span class="error"><?php echo ($emailErr); ?></span>
             <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($email ?: $_SESSION['user']['email']); ?>" placeholder="Email">
 
             <button type="submit">Update profile</button>

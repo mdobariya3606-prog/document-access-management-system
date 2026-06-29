@@ -5,7 +5,6 @@ require '../middleware/auth.php';
 require '../middleware/status.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
-require '../include/header.php';
 /** @var mysqli $conn */
 
 $helper = new Helper($conn);
@@ -26,7 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($oldPasswordErr) && empty($passwordErr)) {
 
-        if (password_verify($password, $_SESSION['user']['password'])) {
+        if (!password_verify($oldPassword, $_SESSION['user']['password'])) {
+            $oldPasswordErr = "Wrong password";
+        } elseif (password_verify($password, $_SESSION['user']['password'])) {
             $passwordErr = "New password must be different from old password";
         } else {
 
@@ -63,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -78,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="change-pass">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <span class="error"><?php echo htmlspecialchars($oldPasswordErr); ?></span>
+            <span class="error"><?php echo ($oldPasswordErr); ?></span>
             <input type="password" name="oldPassword" id="oldPassword" placeholder="Old Password">
 
-            <span class="error"><?php echo htmlspecialchars($passwordErr); ?></span>
+            <span class="error"><?php echo ($passwordErr); ?></span>
             <input type="password" name="password" id="password" placeholder="New Password">
 
             <button type="submit">change-password</button>

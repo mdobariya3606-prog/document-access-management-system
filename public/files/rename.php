@@ -67,7 +67,7 @@ require '../include/header.php';
 <body>
     <div class="rename-form">
         <form action="<?php echo $_SERVER['PHP_SELF'] . '?id=' . $id; ?>" method="post">
-            <span class="error"><?php echo htmlspecialchars($newNameErr); ?></span>
+            <span class="error"><?php echo ($newNameErr); ?></span>
             <input type="text" name="file_name" id="file_name" value="<?php echo htmlspecialchars($file['original_name']); ?>">
             <button type="submit">rename-file</button>
         </form>

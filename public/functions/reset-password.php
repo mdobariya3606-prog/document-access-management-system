@@ -38,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception($stmt->error);
             }
             $result = $stmt->get_result();
-    
+
             $row = $result->fetch_assoc();
-    
+
             $hash = password_hash($password, PASSWORD_DEFAULT);
-    
+
             $stmt = $conn->prepare('update user_info set password = ? where id = ?');
             if (!$stmt) {
                 throw new Exception($conn->error);
@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$stmt->execute()) {
                 throw new Exception($stmt->error);
             }
-    
+
             $helper->logAction($row['id'], 'PASSWORD_RESET');
-    
+
             $stmt = $conn->prepare('delete from password_reset where otp = ?');
             if (!$stmt) {
                 throw new Exception($conn->error);
@@ -62,9 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$stmt->execute()) {
                 throw new Exception($stmt->error);
             }
-    
+
             $conn->commit();
-            
+
             session_destroy();
             header('Location: ../auth/login.php');
             exit;
@@ -72,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->rollback();
             throw $e;
         }
-        
     }
 }
 
@@ -92,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="forget-pass">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <span class="error"><?php echo htmlspecialchars($passwordErr); ?></span>
+            <span class="error"><?php echo ($passwordErr); ?></span>
             <input type="password" name="password" id="password" placeholder="New Password">
             <button type="submit">reset-password</button>
         </form>
