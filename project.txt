@@ -61,7 +61,7 @@ A) Account Management
 B) Document Management (Owner Side)
 ✓ Upload document (PDF, DOCX, XLSX, PPT, etc.)
 ✓ Store in object storage (local)
-→ Create folders (optional but useful)
+✓ Create folders (optional but useful)
 ✓ Rename file
 ✓ Delete file
 ✓ Download file
@@ -135,7 +135,7 @@ x API layer (if frontend is separated)
 
 ✓ users
 ✓ documents
-→ folders (optional)
+✓ folders (optional)
 ✓ document_user_permissions (pivot table)
 → storage_logs
 ✓ password_resets

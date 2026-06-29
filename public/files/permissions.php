@@ -10,7 +10,6 @@ $helper = new Helper($conn);
 require '../middleware/auth.php';
 require '../middleware/status.php';
 require '../middleware/file.php';
-require '../include/header.php';
 
 $document_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -29,19 +28,22 @@ $stmt = $conn->prepare("
         p.document_id = ?
         and u.role != 'ADMIN'
         and u.id != d.owner_id
+        and u.id != ?
 ");
 
 if (!$stmt) {
     throw new Exception($conn->error);
 }
 
-$stmt->bind_param('i', $document_id);
+$stmt->bind_param('ii', $document_id, $_SESSION['user']['id']);
 
 if (!$stmt->execute()) {
     throw new Exception($stmt->error);
 }
 
 $users = $stmt->get_result();
+
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>

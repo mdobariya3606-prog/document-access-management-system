@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+
+  app:
+    build: .
+    container_name: document_app
+    restart: unless-stopped
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - .:/var/www/project
+      - ./php.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: document_mysql
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: document_access_management_system
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/document_access_management_system.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: document_phpmyadmin
+    restart: unless-stopped
+
+    ports:
+      - "8081:80"
+
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:

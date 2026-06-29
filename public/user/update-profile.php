@@ -4,7 +4,6 @@ require '../middleware/auth.php';
 require '../middleware/status.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
-require '../include/header.php';
 /** @var mysqli $conn */
 
 $helper = new Helper($conn);
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>

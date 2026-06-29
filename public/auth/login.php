@@ -35,15 +35,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
-
-                require '../middleware/status.php';
-
                 $email = $row['email'];
 
-                session_regenerate_id(true);
+                // session_regenerate_id(true);
                 $_SESSION['user'] = $row;
 
                 $_SESSION['admin'] = $_SESSION['user']['role'] === 'ADMIN';
+
+                if ($row['status'] === 'INACTIVE') {
+                    session_destroy();
+                    die("Your account has been deactivated, please reach out to the admin.");
+                }
 
                 if (!$_SESSION['admin']) {
                     $folder = mysqli_query($conn, 'select * from user_folder where parent_id = 1 and user_id = ' . $row['id'])->fetch_assoc();
@@ -51,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $folder = mysqli_query($conn, 'select * from user_folder where user_id = ' . $row['id'])->fetch_assoc();
                 }
 
-                if(!$folder) {
+                if (!$folder) {
                     throw new Exception('user folder not found');
                 }
 

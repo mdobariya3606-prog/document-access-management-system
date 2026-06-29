@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../css/style.css">
 <?php
 
 require '../session.php';

@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../css/style.css">
 <?php
 require '../session.php';
 require '../../config/bootstrap.php';
@@ -11,7 +10,6 @@ require '../middleware/auth.php';
 require '../middleware/status.php';
 require '../middleware/permission.php';
 require '../middleware/file.php';
-include '../include/header.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -53,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rename file</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>

@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../css/style.css">
-
 <?php
 
 require '../session.php';
@@ -10,7 +8,6 @@ require '../functions/Helper.php';
 /** @var mysqli $conn */
 $helper = new Helper($conn);
 
-include '../include/header.php';
 require '../middleware/status.php';
 require '../middleware/share-access.php';
 require '../middleware/file.php';
@@ -57,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "select any user.";
     } else {
         $ids = $_POST['user_ids'];
-        $allowed = ['DOWNLOAD', 'SHARE', 'ALL'];    
+        $allowed = ['DOWNLOAD', 'SHARE', 'ALL'];
 
         $type = $_POST['type'];
         if (!in_array($type, $allowed, true)) {
@@ -77,10 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw $e;
         }
 
-        header("Location: all-files.php");
+        header("Location: ../files/all-files.php");
         exit;
     }
 }
+
+include '../include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -90,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?id=<?php echo $document_id; ?>" method="post">
 
                 <h2>Permission</h2>
-                <select name="type" id="" class="permission-type">  
+                <select name="type" id="" class="permission-type">
                     <option value="DOWNLOAD">DOWNLOAD</option>
                     <option value="SHARE">SHARE</option>
                     <option value="ALL">ALL</option>

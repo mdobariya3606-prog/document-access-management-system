@@ -3,7 +3,6 @@ require '../session.php';
 require '../functions/Helper.php';
 require '../middleware/auth.php';
 require '../../config/bootstrap.php';
-include '../include/header.php';
 
 /** @var mysqli $conn */
 $helper = new Helper($conn);
@@ -45,6 +44,7 @@ if (!$stmt->execute()) {
 }
 $folders = $stmt->get_result();
 
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>

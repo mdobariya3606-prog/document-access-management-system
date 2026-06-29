@@ -1,6 +1,5 @@
 <?php
 require '../session.php';
-include '../include/header.php';
 require '../../config/bootstrap.php';
 require '../middleware/auth.php';
 require '../middleware/status.php';
@@ -92,6 +91,7 @@ if (!$stmt->execute()) {
 
 $extResult = $stmt->get_result();
 
+require '../include/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

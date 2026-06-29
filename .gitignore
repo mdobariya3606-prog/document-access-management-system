@@ -1,3 +1,6 @@
+.git
+.vscode
+
 .env
-/vendor
-/uploads
+
+node_modules

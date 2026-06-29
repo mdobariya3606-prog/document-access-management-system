@@ -1,12 +1,9 @@
-<link rel="stylesheet" href="../css/style.css">
-
 <?php
 
 require '../session.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 require '../middleware/admin.php';
-require '../include/header.php';
 /** @var mysqli $conn */
 
 $helper = new Helper($conn);
@@ -42,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+require '../include/header.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>

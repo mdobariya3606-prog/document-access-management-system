@@ -1,11 +1,9 @@
-<link rel="stylesheet" href="../css/style.css">
 <?php
 
 require '../session.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
 require '../middleware/admin.php';
-require '../include/header.php';
 /** @var mysqli $conn */
 
 $id = $idErr = $password = $passwordErr = "";
@@ -38,6 +36,7 @@ if ($users->num_rows === 0) {
     throw new Exception('No user found');
 }
 
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +57,7 @@ if ($users->num_rows === 0) {
 
             <select name="user_id" id="" class="select-user">
                 <option value="0">--Select User--</option>
-                
+
                 <?php while ($user = $users->fetch_assoc()) { ?>
                     <option value="<?php echo $user['id']; ?>"><?php echo '[' . $user['id'] . '] ' . htmlspecialchars($user['name']); ?></option>
                 <?php } ?>

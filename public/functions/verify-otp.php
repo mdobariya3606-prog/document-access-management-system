@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../css/style.css">
-
 <?php
 require '../session.php';
 require '../functions/Helper.php';

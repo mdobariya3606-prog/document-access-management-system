@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../css/style.css">
 <?php
 include '../session.php';
 require '../../config/bootstrap.php';

@@ -3,7 +3,6 @@ include '../session.php';
 include '../functions/Helper.php';
 require '../middleware/auth.php';
 include '../../config/bootstrap.php';
-include '../include/header.php';
 /** @var mysqli $conn */
 
 $helper = new Helper($conn);
@@ -67,6 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>

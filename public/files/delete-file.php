@@ -9,12 +9,17 @@ require '../middleware/status.php';
 require '../middleware/permission.php';
 require '../middleware/file.php';
 
-$id = $_GET['id'];
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $user_id = $_SESSION['user']['id'];
 
 $stmt = $conn->prepare('select type as permission from document_user_permission where user_id = ? and document_id = ?');
+if(!$stmt) {
+    throw new Exception($conn->error);
+}
 $stmt->bind_param('ii', $user_id, $id);
-$stmt->execute();
+if(!$stmt->execute()) {
+    throw new Exception($stmt->error);
+}
 $result = $stmt->get_result();
 $file = $result->fetch_assoc();
 
@@ -24,6 +29,8 @@ if ($result->num_rows == 0) {
     die("no such file exists");
 }
 $file = $result->fetch_assoc();
+
+$path = "";
 
 try {
     $path = '../../uploads/' . $helper->getFolderPath($file['folder_id']) . '/' . $file['file_name'] . '.' . $file['extension'];

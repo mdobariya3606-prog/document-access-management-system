@@ -1,11 +1,9 @@
-<link rel="stylesheet" href="../css/style.css">
 <?php
 require '../session.php';
 require '../middleware/auth.php';
 require '../middleware/status.php';
 require '../../config/bootstrap.php';
 require '../functions/Helper.php';
-include '../include/header.php';
 
 /** @var mysqli $conn */
 
@@ -18,7 +16,7 @@ if ($result->num_rows === 0) {
 $user = $result->fetch_assoc();
 $storage = $helper->getStorageById($user['id']);
 
-
+require '../include/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +26,7 @@ $storage = $helper->getStorageById($user['id']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
