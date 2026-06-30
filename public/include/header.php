@@ -12,7 +12,7 @@
 
 <body>
     <header class="header">
-        <h2>DocVault</h2>
+        <h1>DocVault</h1>
         <nav>
 
             <?php if ($_SESSION['admin']) { ?>

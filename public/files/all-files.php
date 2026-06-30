@@ -11,6 +11,7 @@ $current_path = "";
 
 try {
     $current_path = 'uploads/' . $helper->getFolderPath($_SESSION['folder']['id']);
+    $current_path = str_replace('uploads/user', '', $current_path);
 } catch (Exception $e) {
     $current_path = 'Unavailable';
 }
@@ -82,7 +83,10 @@ require '../include/header.php';
                 <th>Delete</th>
             </tr>
 
-            <?php if ($_SESSION['admin'] && $_SESSION['folder']['parent_id'] != null) { ?>
+            <?php if (
+                ($_SESSION['admin'] && $_SESSION['folder']['parent_id'] != null) ||
+                (!$_SESSION['admin'] && $_SESSION['folder']['parent_id'] != 1)
+            ) { ?>
                 <tr>
                     <td>
                         <a href="../files/previous.php" class="btn-previous">..</a>
