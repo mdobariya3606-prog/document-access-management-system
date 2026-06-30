@@ -167,7 +167,7 @@ class Helper
 
     function getFolderPath($id)
     {
-        $stmt = $this->conn->prepare('select folder_name, parent_id from user_folder where id = ?');
+        $stmt = $this->conn->prepare('select * from user_folder where id = ?');
 
         if (!$stmt) {
             throw new Exception($this->conn->error);
@@ -514,8 +514,6 @@ class Helper
     {
         $otp = random_int(100000, 999999);
         $mail->Subject = 'Reset password';
-
-        $mail->addAddress($user['email']);
 
         $mail->Body = "Password reset code: $otp";
 

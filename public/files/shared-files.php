@@ -67,10 +67,8 @@ require '../include/header.php';
                         <?php } ?>
                     </div>
                 </div>
-            <?php  }
-        } else { ?>
-            <h3>No files have been shared with you yet.</h3>
-        <?php } ?>
+        <?php  }
+        } ?>
     </div>
 </body>
 <script>
