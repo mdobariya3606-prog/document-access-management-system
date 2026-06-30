@@ -1,4 +1,9 @@
-<?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
+<?php
+require '../session.php';
+
+$currentPage = basename($_SERVER['PHP_SELF']); 
+$dashboard = ($_SESSION['admin']) ? '../admin/dashboard.php' : '../user/dashboard.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +17,9 @@
 
 <body>
     <header class="header">
-        <h1 class="title">DocVault</h1>
+        <h1 class="title">
+            <a href="<?php echo $dashboard?>">DocVault</a>
+        </h1>
         <nav>
 
             <?php if ($_SESSION['admin']) { ?>

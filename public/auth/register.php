@@ -34,12 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->begin_transaction();
             try {
                 $user_id = $helper->addUser($name, $email, $password);
-    
+
                 $helper->logAction($user_id, 'REGISTER');
                 $helper->createUserFolder($user_id);
 
                 $conn->commit();
-    
+
                 header("Location: login.php");
                 exit;
             } catch (Exception $e) {
@@ -63,6 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+    <div class="auth">
+        <h1 class="title">DocVault</h1>
+    </div>
     <div class="auth-form">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 

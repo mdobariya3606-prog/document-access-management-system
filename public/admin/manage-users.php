@@ -60,7 +60,7 @@ require '../include/header.php';
             <a href="../admin/change-user-password.php" class="btn-change-pass">Change user password</a>
 
             <h2>Delete users</h3>
-                <span class="error"><?php echo htmlspecialchars($error); ?></span>
+                <span class="error"><?php echo ($error); ?></span>
 
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                     <table class="user-table">

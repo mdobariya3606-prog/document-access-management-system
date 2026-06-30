@@ -34,15 +34,17 @@
   min-height: 100px;
 }
 
-.title {
-  user-select: none;
-}
-
-.header h1 {
+.header .title a {
   font-family: "Remingo";
-  margin-bottom: 10px;
+  color: #111808;
+  text-decoration: none;
+  user-select: none;
   font-weight: bold;
   font-size: 35px;
+}
+
+.header .title {
+  margin-bottom: 20px;
 }
 
 .header nav {
@@ -141,6 +143,14 @@ td {
 /* ================================================
    AUTH FORMS (Login / Register)
    ================================================ */
+
+  
+.auth h1 {
+  font-size: 35px;
+  font-family: "Remingo";
+  padding: 10px;
+}
+
 .forget-pass,
 .auth-form {
   height: 70vh;
