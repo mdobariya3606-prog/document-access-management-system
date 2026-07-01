@@ -5,3 +5,40 @@ Stack trace:
 #2 {main}
   thrown in C:\xampp\htdocs\project\public\functions\Helper.php on line 106
 [30-Jun-2026 18:01:03 Asia/Kolkata] PHP Fatal error:  Maximum execution time of 300 seconds exceeded in C:\xampp\htdocs\project\public\files\add-file.php on line 54
+[01-Jul-2026 16:27:23 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:34 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:35 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:35 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:35 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:36 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:36 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:36 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:37 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:37 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:37 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:47 Asia/Kolkata] PHP Fatal error:  Cannot use [] for reading in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:47 Asia/Kolkata] PHP Fatal error:  Cannot use [] for reading in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:47 Asia/Kolkata] PHP Fatal error:  Cannot use [] for reading in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:47 Asia/Kolkata] PHP Fatal error:  Cannot use [] for reading in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:47 Asia/Kolkata] PHP Fatal error:  Cannot use [] for reading in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:48 Asia/Kolkata] PHP Fatal error:  Cannot use [] for reading in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:50 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:51 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:28:51 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:30:12 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:30:13 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:30:25 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:30:52 Asia/Kolkata] ParseError: syntax error, unexpected token "if" in C:\xampp\htdocs\project\public\middleware\admin.php:6
+Stack trace:
+#0 {main}
+[01-Jul-2026 16:30:52 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:30:52 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:30:53 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:33:21 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:33:21 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:33:21 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:33:22 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:33:22 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 6
+[01-Jul-2026 16:33:36 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:33:36 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5
+[01-Jul-2026 16:33:37 Asia/Kolkata] PHP Warning:  Undefined array key "admin" in C:\xampp\htdocs\project\public\middleware\admin.php on line 5

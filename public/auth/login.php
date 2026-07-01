@@ -7,9 +7,23 @@ include '../functions/Helper.php';
 $helper = new Helper($conn);
 $helper->alreadyLoggedIn();
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $email = $emailErr = $password = $passwordErr = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (
+        !isset($_POST['csrf_token']) ||
+        !isset($_SESSION['csrf_token']) ||
+        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
+    ) {
+        http_response_code(403);
+        exit('Invalid CSRF token.');
+    }
+
     $email = $helper->validate($_POST['email']);
     $password = $helper->validate($_POST['password']);
 
@@ -61,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $helper->logAction($_SESSION['user']['id'], 'LOGIN');
 
+                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
                 if ($_SESSION['admin']) {
                     header('Location: ../admin/dashboard.php');
                     exit;
@@ -93,6 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="auth-form">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+
+            <input
+                type="hidden"
+                name="csrf_token"
+                value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8') ?>">
 
             <span class="error"><?php echo $emailErr; ?></span>
             <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($email); ?>" placeholder="Email">

@@ -17,10 +17,8 @@ try {
     $mail->Port = 587;
     
     $mail->setFrom($_ENV['MAIL_FROM'], 'Document Access Management System');
-    $mail->addAddress($_ENV['MAIL_TO']);
 } catch (Exception $e) {
     error_log($e);
 }
-
 
 ?>

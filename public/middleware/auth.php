@@ -1,7 +1,7 @@
 <?php
 
 require '../session.php';
-if (empty($_SESSION)) {
+if (!isset($_SESSION['user'])) {
     header("Location: ../auth/login.php");
     exit;
 }

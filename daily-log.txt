@@ -250,3 +250,10 @@ Learning: [08:20:00]
 - Added the "DocVault" title to the login and registration pages.
 - Updated document sharing emails to send notifications to the actual recipient instead of a dummy email.
 - Made the header sticky for better navigation.
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+forget password email was not working due to configuration issue
+send code to real user not on dummy mail
+
+------------------------------------------------------------------------------------------------------------------------------------

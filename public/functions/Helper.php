@@ -25,9 +25,14 @@ class Helper
 
     function alreadyLoggedIn()
     {
-        if (!empty($_SESSION)) {
-            header("Location: ../user/profile.php");
-            exit;
+        if (isset($_SESSION['user'])) {
+            if ($_SESSION['admin']) {
+                header('Location: ../admin/dashboard.php');
+                exit;
+            } else {
+                header("Location: ../user/dashboard.php");
+                exit;
+            }
         }
     }
 
@@ -513,6 +518,7 @@ class Helper
     function sendPasswordEmail($user, $mail)
     {
         $otp = random_int(100000, 999999);
+        $mail->addAddress($user['email']);
         $mail->Subject = 'Reset password';
 
         $mail->Body = "Password reset code: $otp";
